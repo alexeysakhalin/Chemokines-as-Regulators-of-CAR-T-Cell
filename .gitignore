@@ -1,0 +1,54 @@
+# Python caches and packaging
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Local environments
+.venv/
+venv/
+.conda/
+.env
+.env.*
+!.env.example
+
+# Test and quality-tool state
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+/.determinism-*/
+
+# Workflow state and logs
+.snakemake/
+*.log
+logs/
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Raw or derived data are restored from their documented sources
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/demo/*
+!data/demo/.gitkeep
+!data/demo/SYNTHETIC_DATA_NOTICE.json
+!data/demo/functional.tsv
+!data/demo/manifest.tsv
+!data/demo/protein.tsv
+!data/demo/single_cell.tsv
+!data/demo/spatial.tsv
+
+# Generated outputs
+results/*
+!results/.gitkeep
+!results/README.md

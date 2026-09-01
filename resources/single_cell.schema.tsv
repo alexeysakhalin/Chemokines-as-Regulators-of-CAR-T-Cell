@@ -1,0 +1,21 @@
+column	type	required	nullable	unique	pattern	allowed	description
+cell_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Cell barcode unique within sample_id; may repeat across feature rows in long format.
+sample_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manifest-linked sample identifier.
+patient_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manifest-linked patient identifier.
+section_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Section identifier or NA for blood/product samples.
+timepoint_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Protocol-defined longitudinal timepoint.
+compartment	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Optional row-level compartment; validated against the manifest when supplied.
+modality	string	true	false	false		scrna|citeseq	Single-cell assay modality.
+t_cell_origin	string	false	true	false		CAR_T|endogenous_T|CAR_negative_product_T	Canonical origin column; another configured origin column may be used.
+car_positive	boolean	false	true	false			Canonical CAR gate column; another configured binary column may be used.
+cell_state	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Canonical state column; another configured prespecified state column may be used.
+t_cell_subtype	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$	CD4|CD8|other|unspecified	Optional prespecified T-cell subtype.
+annotation_version	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Immutable cell-state annotation version.
+car_gate_version	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Immutable CAR-detection gate or classifier version.
+feature_id	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._:-]*$		Feature identifier for canonical long-format RNA or ADT counts.
+feature_type	string	false	true	false		RNA|ADT	RNA or antibody-derived-tag feature type in long format.
+count	integer	false	true	false	^[0-9]+$		Untransformed nonnegative count in long format.
+CCL5_RNA_count	integer	false	true	false	^[0-9]+$		Optional demonstration raw RNA count; real raw count columns follow the same nonnegative-integer contract.
+CXCR3_RNA_count	integer	false	true	false	^[0-9]+$		Optional demonstration raw RNA count; real raw count columns follow the same nonnegative-integer contract.
+CXCR3_ADT_count	integer	false	true	false	^[0-9]+$		Optional demonstration raw ADT count; real raw count columns follow the same nonnegative-integer contract.
+data_origin	string	true	false	false		experimental|public|synthetic	Provenance class.

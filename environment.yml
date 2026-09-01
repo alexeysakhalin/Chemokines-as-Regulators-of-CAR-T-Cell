@@ -1,0 +1,22 @@
+name: chemokine-cart
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.11
+  - pip=25.0.1
+  - setuptools=75.8.2
+  - wheel=0.45.1
+  - pip:
+      - --require-hashes
+      - --requirement requirements.lock.txt
+variables:
+  PYTHONHASHSEED: "20260901"
+  LANG: C.UTF-8
+  LC_ALL: C.UTF-8
+  TZ: UTC
+  SOURCE_DATE_EPOCH: "1788220800"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+  NUMEXPR_NUM_THREADS: "1"
+  MPLBACKEND: Agg

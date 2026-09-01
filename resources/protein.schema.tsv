@@ -1,0 +1,14 @@
+column	type	required	nullable	unique	pattern	allowed	description
+measurement_id	string	true	false	true	^[A-Za-z0-9][A-Za-z0-9._-]*$		Unique measurement identifier.
+sample_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manifest-linked sample identifier.
+patient_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manifest-linked patient identifier.
+section_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Section identifier or NA when not applicable.
+timepoint_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Protocol-defined collection timepoint.
+analyte	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Protein analyte, including CXCL16.
+molecular_form	string	true	false	false		soluble|membrane	Soluble or membrane-associated form.
+response	number	true	false	false			Observed protein abundance or intensity.
+unit	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Documented measurement unit.
+assay	string	true	false	false		immunoassay|flow_cytometry|imaging	Protein measurement technology.
+biological_replicate	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Biological replicate identifier.
+technical_replicate	string	true	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Technical replicate identifier.
+data_origin	string	true	false	false		experimental|public|synthetic	Provenance class.

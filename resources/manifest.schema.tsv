@@ -1,0 +1,22 @@
+column	type	required	nullable	unique	pattern	allowed	description
+record_id	string	true	false	true	^[A-Za-z0-9][A-Za-z0-9._-]*$		Unique manifest record identifier.
+sample_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Stable biological sample identifier.
+patient_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Pseudonymized patient or donor identifier.
+section_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Tissue section identifier; use NA when not applicable.
+timepoint_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Protocol-defined collection timepoint identifier.
+modality	string	true	false	false		scrna|citeseq|spatial|protein|functional	Primary data modality.
+assay	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Assay or canonical table type.
+experimental_arm	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Prespecified product or treatment arm; MULTI only for synthetic cohort files.
+compartment	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Product, blood, tumor, or other prespecified compartment.
+batch_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manufacturing, library, imaging, plate, or acquisition batch.
+reference_version	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Immutable sequence, imaging, or assay reference version; NA if not applicable.
+protocol_version	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Versioned experimental protocol identifier.
+assay_panel_version	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Versioned antibody, imaging, or targeted-assay panel.
+condition	string	true	true	false			Experimental condition.
+comparator	string	true	true	false			Prespecified comparator.
+source_path	string	true	true	false	^(?!/).*$		Project-relative local source path.
+accession	string	true	true	false			Public repository accession or stable identifier.
+sha256	string	true	true	false	^[0-9a-f]{64}$		SHA-256 digest; required when source_path is present.
+data_origin	string	true	false	false		experimental|public|synthetic	Provenance class.
+evidence_eligible	boolean	true	false	false			Whether the record may contribute to scientific evidence.
+notes	string	true	true	false			Free-text provenance note.

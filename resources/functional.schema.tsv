@@ -1,0 +1,21 @@
+column	type	required	nullable	unique	pattern	allowed	description
+measurement_id	string	true	false	true	^[A-Za-z0-9][A-Za-z0-9._-]*$		Unique measurement identifier.
+sample_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manifest-linked sample identifier.
+patient_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manifest-linked patient or donor identifier.
+section_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Section identifier or NA when not applicable.
+timepoint_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Protocol-defined collection timepoint.
+assay	string	true	false	false		chemotaxis|retention|egress|cxcl16	Functional assay class.
+condition	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Experimental condition.
+product	string	true	false	false		identical_control|receptor_matched	Chemokine-module product or identical CAR control.
+response	number	true	false	false			Prespecified assay response.
+unit	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Documented response unit.
+biological_replicate	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Independent donor or experiment identifier.
+technical_replicate	string	true	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Technical replicate identifier.
+pair_id	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Matched experimental-pair identifier.
+chemokine	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Chemokine used in the assay.
+dose	number	false	true	false			Chemokine concentration.
+dose_unit	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Chemokine concentration unit.
+time	number	false	true	false			Assay duration.
+time_unit	string	false	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Assay duration unit.
+cxcl16_form	string	false	true	false		soluble|membrane	CXCL16 molecular form when applicable.
+data_origin	string	true	false	false		experimental|public|synthetic	Provenance class.

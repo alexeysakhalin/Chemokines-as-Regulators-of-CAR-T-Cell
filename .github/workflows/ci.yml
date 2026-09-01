@@ -1,0 +1,84 @@
+name: Continuous integration
+
+on:
+  push:
+    branches:
+      - main
+      - draft
+      - "draft/**"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Python 3.11 checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PYTHONHASHSEED: "20260901"
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+      TZ: UTC
+      SOURCE_DATE_EPOCH: "1788220800"
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+      MPLBACKEND: Agg
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11.11"
+          cache: pip
+
+      - name: Install project
+        run: |
+          python -m pip install --upgrade pip==25.0.1
+          python -m pip install --require-hashes --requirement requirements.lock.txt
+          python -m pip install --no-deps --no-build-isolation --editable .
+
+      - name: Static checks
+        run: python -m ruff check .
+
+      - name: Formatting check
+        run: python -m ruff format --check .
+
+      - name: Tests
+        run: python -m pytest
+
+      - name: Create demonstration inputs
+        run: chemokine-cart make-demo --output-dir data/demo --seed 20260901 --force
+
+      - name: Workflow dry run
+        run: |
+          python -m snakemake --snakefile Snakefile --cores 1 --dry-run \
+            --configfile config/config.yaml \
+            --config manifest_path=data/demo/manifest.tsv output_dir=results/demo random_seed=20260901
+
+      - name: Reproducibility smoke test
+        run: |
+          python -m snakemake --snakefile Snakefile --cores 1 --rerun-incomplete \
+            --configfile config/config.yaml \
+            --config manifest_path=data/demo/manifest.tsv output_dir=results/demo random_seed=20260901
+
+      - name: Byte-for-byte scientific-output check
+        run: python scripts/verify_determinism.py --random-seed 20260901
+
+      - name: Upload workflow logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: workflow-logs
+          path: results/**/logs/*.log
+          if-no-files-found: ignore
