@@ -1,0 +1,120 @@
+project:
+  name: Chemokines as Regulators of CAR-T Cell Function
+  version: 0.1.0.dev0
+  root: ..
+  random_seed: 20260901
+
+manifest:
+  path: config/manifest.example.tsv
+  schema: resources/manifest.schema.tsv
+  check_files: false
+  verify_checksums: true
+
+schemas:
+  single_cell: resources/single_cell.schema.tsv
+  spatial: resources/spatial.schema.tsv
+  protein: resources/protein.schema.tsv
+  functional: resources/functional.schema.tsv
+
+run:
+  modules:
+    - single_cell
+    - spatial
+    - protein
+    - functional
+  fail_on_missing_modality: true
+  strict_validation: true
+
+single_cell:
+  modalities:
+    - scrna
+    - citeseq
+  car_column: car_positive
+  origin_column: t_cell_origin
+  subtype_column: t_cell_subtype
+  group_columns:
+    - patient_id
+    - timepoint_id
+    - t_cell_origin
+  state_column: cell_state
+  states:
+    - memory
+    - effector
+    - dysfunctional
+  other_state_label: other
+  product_compartments:
+    - product
+  product_timepoints:
+    - PRODUCT
+  timepoint_order:
+    - PRODUCT
+    - T0
+    - T1
+  reference_timepoint: PRODUCT
+  paired_change_origins:
+    - CAR_T
+  rna_count_suffix: _RNA_count
+  adt_count_suffix: _ADT_count
+  minimum_cells_per_group: 3
+  minimum_cells_per_pseudobulk: 2
+  minimum_patients_per_stratum: 3
+  bootstrap_iterations: 2000
+
+spatial:
+  coordinate_columns:
+    - x
+    - y
+  group_columns:
+    - patient_id
+    - section_id
+  landmark_column: structure
+  ligand_source_column: is_ligand_source
+  car_t_column: is_car_t
+  coordinate_scale_um: 1.0
+  neighborhood_radius_um: 50.0
+  permutation_iterations: 10000
+  permutation_within:
+    - patient_id
+    - section_id
+
+protein:
+  analyte_column: analyte
+  form_column: molecular_form
+  response_column: response
+  aggregate_technical_replicates: true
+  stratify_by:
+    - molecular_form
+    - unit
+    - assay
+  forbid_cross_unit_comparison: true
+
+functional:
+  response_column: response
+  biological_unit: biological_replicate
+  aggregate_technical_replicates: true
+  paired_by: pair_id
+  minimum_biological_replicates: 3
+  bootstrap_iterations: 2000
+
+statistics:
+  patient_is_inference_unit: true
+  confidence_level: 0.95
+  multiple_testing: benjamini_hochberg
+  report_effect_sizes: true
+  report_confidence_intervals: true
+
+evidence:
+  synthetic_mode: software_test_only
+  exclude_synthetic_from_evidence: true
+  require_evidence_eligible_for_scientific_outputs: true
+
+output:
+  root: results
+  figures: results/figures
+  tables: results/tables
+  provenance: results/provenance
+  figure_formats:
+    - pdf
+    - svg
+    - png
+  png_dpi: 300

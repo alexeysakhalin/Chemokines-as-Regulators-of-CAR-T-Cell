@@ -1,0 +1,15 @@
+column	type	required	nullable	unique	pattern	allowed	description
+cell_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Segmented-cell or spot identifier, unique within patient_id and section_id.
+sample_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manifest-linked sample identifier.
+patient_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manifest-linked patient identifier.
+section_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Manifest-linked tissue section identifier.
+timepoint_id	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Protocol-defined collection timepoint.
+x	number	true	false	false			X coordinate in a documented common unit.
+y	number	true	false	false			Y coordinate in a documented common unit.
+cell_type	string	true	false	false	^[A-Za-z0-9][A-Za-z0-9._ -]*$		Cell-type annotation or spot class.
+is_ligand_source	boolean	true	false	false			Prespecified indicator of a chemokine-producing object.
+is_car_t	boolean	true	false	false			Prespecified CAR-T indicator.
+structure	string	true	true	false		vessel|tumor_nest|stroma|lymphatic	Landmark class; empty for ordinary cells.
+chemokine	string	true	true	false	^[A-Za-z0-9][A-Za-z0-9._-]*$		Measured chemokine when supplied in long format.
+chemokine_signal	number	true	true	false			Quantitative transformed or raw signal with scale and method recorded.
+data_origin	string	true	false	false		experimental|public|synthetic	Provenance class.

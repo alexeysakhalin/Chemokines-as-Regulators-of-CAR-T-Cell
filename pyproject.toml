@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools==75.8.2", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chemokine-cart"
+version = "0.1.0.dev0"
+description = "Reproducible analyses for chemokine regulation of CAR-T cell states and trafficking"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = { text = "MIT" }
+dependencies = [
+  "anndata==0.11.3",
+  "h5py==3.12.1",
+  "Jinja2==3.1.6",
+  "matplotlib==3.9.4",
+  "numpy==1.26.4",
+  "openpyxl==3.1.5",
+  "pandas==2.2.3",
+  "PyYAML==6.0.2",
+  "scanpy==1.10.4",
+  "scikit-learn==1.6.1",
+  "scipy==1.14.1",
+  "seaborn==0.13.2",
+  "statsmodels==0.14.4",
+]
+
+[project.optional-dependencies]
+workflow = [
+  "snakemake==8.28.0",
+]
+dev = [
+  "pytest==8.3.5",
+  "pytest-cov==6.0.0",
+  "ruff==0.9.10",
+  "setuptools==75.8.2",
+  "snakemake==8.28.0",
+  "wheel==0.45.1",
+]
+
+[project.scripts]
+chemokine-cart = "chemokine_cart.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers -ra"
+minversion = "8.3"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["data", "results"]
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
