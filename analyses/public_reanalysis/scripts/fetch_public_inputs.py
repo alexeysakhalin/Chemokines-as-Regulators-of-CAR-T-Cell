@@ -12,7 +12,6 @@ import time
 import urllib.request
 from pathlib import Path
 
-
 SPATIAL_MEMBERS = (
     "GSM8968967_barcodes.tsv.gz",
     "GSM8968967_features.tsv.gz",
@@ -61,7 +60,10 @@ def download(url: str, target: Path, expected_bytes: int, expected_sha256: str) 
     last_error: Exception | None = None
     for attempt in range(4):
         try:
-            with urllib.request.urlopen(request, timeout=180) as response, temporary.open("wb") as output:
+            with (
+                urllib.request.urlopen(request, timeout=180) as response,
+                temporary.open("wb") as output,
+            ):
                 shutil.copyfileobj(response, output, length=1024 * 1024)
             verify(temporary, expected_bytes, expected_sha256)
             temporary.replace(target)

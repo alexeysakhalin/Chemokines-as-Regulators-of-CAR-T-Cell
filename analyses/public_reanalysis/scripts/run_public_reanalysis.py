@@ -22,7 +22,6 @@ from scipy.io import mmread
 from scipy.spatial import cKDTree
 from scipy.stats import mannwhitneyu, wilcoxon
 
-
 T_CELL_STATES = ("GZMAlo CD4", "GZMAhi CD4", "CD8", "Proliferating")
 STATE_LABELS = {
     "GZMAlo CD4": "GZMA-low CD4",
@@ -106,7 +105,10 @@ def analyze_single_cell(metadata_path: Path) -> dict[str, pd.DataFrame]:
     t_donor = (
         cross[cross["is_t_cell"]]
         .groupby(["analysis_group", "donor_id"], observed=True)
-        .agg(cxcr6_positive_t=("cxcr6_positive", "sum"), n_t_cells_check=("cell_barcode", "size"))
+        .agg(
+            cxcr6_positive_t=("cxcr6_positive", "sum"),
+            n_t_cells_check=("cell_barcode", "size"),
+        )
         .reset_index()
     )
     t_donor["cxcr6_fraction_t"] = t_donor["cxcr6_positive_t"] / t_donor["n_t_cells_check"]
@@ -164,7 +166,10 @@ def analyze_single_cell(metadata_path: Path) -> dict[str, pd.DataFrame]:
     )
     paired_wide = paired.pivot(index="donor_id", columns="CAR", values="fraction")
     paired_test = wilcoxon(
-        paired_wide["CAR_Pos"], paired_wide["CAR_Neg"], alternative="two-sided", method="exact"
+        paired_wide["CAR_Pos"],
+        paired_wide["CAR_Neg"],
+        alternative="two-sided",
+        method="exact",
     )
     car_test = pd.DataFrame(
         [
@@ -266,8 +271,10 @@ def analyze_gse125881(matrix_path: Path, metadata_path: Path) -> dict[str, pd.Da
         {
             "patient": detected.index,
             "early_minus_ip_detected_percentage_points": (detected["Early"] - detected["IP"]) * 100,
-            "very_late_minus_early_detected_percentage_points":
-                (detected["Very late"] - detected["Early"]) * 100,
+            "very_late_minus_early_detected_percentage_points": (
+                detected["Very late"] - detected["Early"]
+            )
+            * 100,
             "early_minus_ip_cpm": cpm["Early"] - cpm["IP"],
             "very_late_minus_early_cpm": cpm["Very late"] - cpm["Early"],
         }
@@ -306,7 +313,9 @@ def analyze_gse125881(matrix_path: Path, metadata_path: Path) -> dict[str, pd.Da
 
     receptor_rows = []
     module_rows = []
-    for (patient, phase), indices in cells.groupby(["Patient", "Group"], observed=True).indices.items():
+    for (patient, phase), indices in cells.groupby(
+        ["Patient", "Group"], observed=True
+    ).indices.items():
         positions = np.asarray(indices, dtype=int)
         for gene in CHEMOKINE_RECEPTORS:
             values = target_counts[gene][positions]
@@ -446,7 +455,6 @@ def analyze_spatial(raw_dir: Path, seed: int, n_permutations: int) -> dict[str, 
     depth_stratum = np.minimum((percent_rank * 10).astype(int), 9)
 
     cxcl16_mask = counts["CXCL16"] > 0
-    cxcr6_mask = counts["CXCR6"] > 0
     myeloid_mask = myeloid_score > 0
     myeloid_tree = cKDTree(coordinates_um[myeloid_mask])
     distance_to_myeloid, _ = myeloid_tree.query(coordinates_um)
@@ -586,10 +594,22 @@ def create_figure(
     for x, y, width, height, text_value, color in boxes:
         ax.add_patch(
             mpl.patches.FancyBboxPatch(
-                (x, y), width, height, boxstyle="round,pad=0.015", facecolor=color, edgecolor="#55606A"
+                (x, y),
+                width,
+                height,
+                boxstyle="round,pad=0.015",
+                facecolor=color,
+                edgecolor="#55606A",
             )
         )
-        ax.text(x + width / 2, y + height / 2, text_value, ha="center", va="center", fontsize=7.2)
+        ax.text(
+            x + width / 2,
+            y + height / 2,
+            text_value,
+            ha="center",
+            va="center",
+            fontsize=7.2,
+        )
     ax.set_title("Public inputs", pad=4)
     _panel_label(ax, "A")
 
@@ -618,7 +638,9 @@ def create_figure(
     )
     ax.set_xlabel("")
     ax.set_ylabel("")
-    ax.set_xticklabels(["Product", "Early\nD12–21", "Late\nD28–38", "Very late\nD83–112"], rotation=0)
+    ax.set_xticklabels(
+        ["Product", "Early\nD12–21", "Late\nD28–38", "Very late\nD83–112"], rotation=0
+    )
     ax.set_yticklabels(["Memory", "Effector", "Dysfunction"], rotation=0)
     ax.set_title("GSE125881 state-marker detection (median of 4 patients)")
     ax.text(
@@ -655,7 +677,14 @@ def create_figure(
     for index, group in enumerate(("IIH comparator", "ICANS onset")):
         ax.plot([index - 0.24, index + 0.24], [medians[group]] * 2, color="black", lw=1.4)
     p_value = single["primary_tests"].iloc[0]["p_value_exact"]
-    ax.text(0.5, 0.96, f"Exact Mann–Whitney P = {p_value:.3f}", transform=ax.transAxes, ha="center", va="top")
+    ax.text(
+        0.5,
+        0.96,
+        f"Exact Mann–Whitney P = {p_value:.3f}",
+        transform=ax.transAxes,
+        ha="center",
+        va="top",
+    )
     ax.set_xlabel("")
     ax.set_xticks([0, 1], ["IIH comparator", "ICANS onset"])
     ax.set_ylabel("CXCR6-positive T cells")
@@ -667,11 +696,24 @@ def create_figure(
     # D: paired CAR status comparison
     ax = fig.add_subplot(grid[1, 2:4])
     paired = single["car_summary"].pivot(index="donor_id", columns="CAR", values="fraction")
-    for donor_id, row in paired.iterrows():
+    for _donor_id, row in paired.iterrows():
         ax.plot([0, 1], [row["CAR_Neg"], row["CAR_Pos"]], color="#A1A9AF", lw=0.8, zorder=1)
-        ax.scatter([0, 1], [row["CAR_Neg"], row["CAR_Pos"]], color=["#66727B", "#2D8C84"], s=22, zorder=2)
+        ax.scatter(
+            [0, 1],
+            [row["CAR_Neg"], row["CAR_Pos"]],
+            color=["#66727B", "#2D8C84"],
+            s=22,
+            zorder=2,
+        )
     test = single["car_test"].iloc[0]
-    ax.text(0.5, 0.96, f"Exact paired P = {test['p_value_exact']:.3f}", transform=ax.transAxes, ha="center", va="top")
+    ax.text(
+        0.5,
+        0.96,
+        f"Exact paired P = {test['p_value_exact']:.3f}",
+        transform=ax.transAxes,
+        ha="center",
+        va="top",
+    )
     ax.set_xticks([0, 1], ["CAR-negative", "CAR-positive"])
     ax.set_xlim(-0.35, 1.35)
     ax.set_ylim(0, 0.65)
@@ -686,7 +728,11 @@ def create_figure(
     trajectories = longitudinal["summary"].copy()
     x = np.arange(len(phases))
     patient_colors = dict(
-        zip(sorted(trajectories["Patient"].unique()), ("#0072B2", "#E69F00", "#009E73", "#CC79A7"))
+        zip(
+            sorted(trajectories["Patient"].unique()),
+            ("#0072B2", "#E69F00", "#009E73", "#CC79A7"),
+            strict=False,
+        )
     )
     for patient, patient_data in trajectories.groupby("Patient", observed=True):
         patient_data = patient_data.set_index("Group").reindex(phases)
@@ -803,7 +849,7 @@ def create_figure(
 
     output.mkdir(parents=True, exist_ok=True)
     creator = "CAR-T public-data reproducibility workflow"
-    fixed_date = dt.datetime(2026, 9, 2, tzinfo=dt.timezone.utc)
+    fixed_date = dt.datetime(2026, 9, 2, tzinfo=dt.UTC)
     fig.savefig(
         output / "figure6_public_reanalysis.png",
         dpi=300,
@@ -811,7 +857,11 @@ def create_figure(
     )
     fig.savefig(
         output / "figure6_public_reanalysis.pdf",
-        metadata={"Creator": creator, "CreationDate": fixed_date, "ModDate": fixed_date},
+        metadata={
+            "Creator": creator,
+            "CreationDate": fixed_date,
+            "ModDate": fixed_date,
+        },
     )
     fig.savefig(
         output / "figure6_public_reanalysis.svg",
@@ -840,16 +890,27 @@ def write_outputs(
         "timeline",
     )
     for key in table_keys:
-        single[key].to_csv(table_dir / f"scRNA_{key}.tsv", sep="\t", index=False, float_format="%.8g")
+        single[key].to_csv(
+            table_dir / f"scRNA_{key}.tsv", sep="\t", index=False, float_format="%.8g"
+        )
     for key, table in longitudinal.items():
         table.to_csv(
-            table_dir / f"gse125881_{key}.tsv", sep="\t", index=False, float_format="%.8g"
+            table_dir / f"gse125881_{key}.tsv",
+            sep="\t",
+            index=False,
+            float_format="%.8g",
         )
     spatial["marker_summary"].to_csv(
-        table_dir / "spatial_marker_summary.tsv", sep="\t", index=False, float_format="%.8g"
+        table_dir / "spatial_marker_summary.tsv",
+        sep="\t",
+        index=False,
+        float_format="%.8g",
     )
     spatial["proximity"].to_csv(
-        table_dir / "spatial_proximity_summary.tsv", sep="\t", index=False, float_format="%.8g"
+        table_dir / "spatial_proximity_summary.tsv",
+        sep="\t",
+        index=False,
+        float_format="%.8g",
     )
     create_figure(single, longitudinal, spatial, output_dir)
 
@@ -872,9 +933,7 @@ def write_outputs(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     outputs = sorted(
-        path
-        for path in output_dir.rglob("*")
-        if path.is_file() and path.name != "SHA256SUMS"
+        path for path in output_dir.rglob("*") if path.is_file() and path.name != "SHA256SUMS"
     )
     checksum_lines = [f"{sha256(path)}  {path.relative_to(output_dir)}" for path in outputs]
     (output_dir / "SHA256SUMS").write_text("\n".join(checksum_lines) + "\n", encoding="utf-8")
