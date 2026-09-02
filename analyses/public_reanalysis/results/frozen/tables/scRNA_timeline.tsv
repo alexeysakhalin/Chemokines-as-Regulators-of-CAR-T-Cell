@@ -1,0 +1,4 @@
+phase	n_cells	n_t_cells	cxcr6_fraction_t	car_fraction_t	proliferating_fraction_t
+pre-ICANS	40	32	0.1875	0	0
+ICANS_Grade4	31	31	0.38709677	0.25806452	0.12903226
+post-ICANS	392	283	0.16961131	0.081272085	0.074204947

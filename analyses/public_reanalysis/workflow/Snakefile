@@ -1,0 +1,36 @@
+rule all:
+    input:
+        "results/local/SHA256SUMS"
+
+
+rule fetch:
+    output:
+        "data/raw/GSE269379/extracted/GSM8968967_barcodes.tsv.gz",
+        "data/raw/GSE269379/extracted/GSM8968967_features.tsv.gz",
+        "data/raw/GSE269379/extracted/GSM8968967_matrix.mtx.gz",
+        "data/raw/GSE269379/extracted/GSM8968967_scalefactors_json.json.gz",
+        "data/raw/GSE269379/extracted/GSM8968967_tissue_hires_image.png.gz",
+        "data/raw/GSE269379/extracted/GSM8968967_tissue_positions.parquet.gz",
+        "data/raw/GSE269379/GSE269379_metadata.csv.gz",
+        "data/raw/GSE125881/GSE125881_raw.expMatrix.csv.gz",
+        "data/raw/GSE125881/meta-data.csv",
+        "data/raw/GSE125881/GSE125881_family.soft.gz",
+    shell:
+        "python scripts/fetch_public_inputs.py"
+
+
+rule analysis:
+    input:
+        downloaded=rules.fetch.output,
+        crosswalk="config/gse125881_sample_crosswalk.tsv",
+    output:
+        "results/local/SHA256SUMS"
+    shell:
+        "PYTHONHASHSEED=20260902 MPLBACKEND=Agg python scripts/run_public_reanalysis.py "
+        "--gse125881-matrix data/raw/GSE125881/GSE125881_raw.expMatrix.csv.gz "
+        "--gse125881-metadata data/raw/GSE125881/meta-data.csv "
+        "--gse125881-crosswalk config/gse125881_sample_crosswalk.tsv "
+        "--gse125881-soft data/raw/GSE125881/GSE125881_family.soft.gz "
+        "--metadata data/raw/GSE269379/GSE269379_metadata.csv.gz "
+        "--raw-dir data/raw/GSE269379/extracted "
+        "--output-dir results/local --seed 20260902 --spatial-permutations 10000"
