@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.snakemake/
+data/raw/
+results/local/
+results/candidate*/

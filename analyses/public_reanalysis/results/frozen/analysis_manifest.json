@@ -1,0 +1,71 @@
+{
+  "analysis_scope": "Exploratory secondary analysis",
+  "datasets": [
+    "GSE125881",
+    "GSE269379"
+  ],
+  "gse125881_cells_total": 62167,
+  "gse269379_metadata_cells_total": 8661,
+  "inputs": [
+    {
+      "bytes": 75220,
+      "path": "GSE269379_metadata.csv.gz",
+      "sha256": "41ef85c940ff14746025b6a049c1121668d06a2dbbbd48acefe5eaea60fba3ba"
+    },
+    {
+      "bytes": 114573707,
+      "path": "GSE125881_raw.expMatrix.csv.gz",
+      "sha256": "243e6e2dd09158e08dcaecfbf35b23122ac3096c1039355b7590474e76d8c02c"
+    },
+    {
+      "bytes": 7356550,
+      "path": "meta-data.csv",
+      "sha256": "a68f9d1bafce05b666284cdcfc3123923448cfcfd32eb15d6b47649f8016dff2"
+    },
+    {
+      "bytes": 1244,
+      "path": "gse125881_sample_crosswalk.tsv",
+      "sha256": "21a97afe6c8e10cd10cc51a78570ec8ebc90e6f5fc45e6c9f70423d667db3d5d"
+    },
+    {
+      "bytes": 5747,
+      "path": "GSE125881_family.soft.gz",
+      "sha256": "13a3085bc28fb27228ca858ed935d74b936dbd3f5efc376e485f73ef7b62eb1e"
+    },
+    {
+      "bytes": 1521945,
+      "path": "GSM8968967_barcodes.tsv.gz",
+      "sha256": "846901b7b326bb65526ff300e667bb1bd8a55fe2408151e2df4f3776e43200cb"
+    },
+    {
+      "bytes": 156435,
+      "path": "GSM8968967_features.tsv.gz",
+      "sha256": "2232f65a5a709e22b8167ee548dfed1648e4bd5fe35c28cba0b8af7b9d594035"
+    },
+    {
+      "bytes": 65311208,
+      "path": "GSM8968967_matrix.mtx.gz",
+      "sha256": "981c08cb25ad1856ed0fa9f759ad1bf3e44043df0806f1e20036501c3f072b7b"
+    },
+    {
+      "bytes": 224,
+      "path": "GSM8968967_scalefactors_json.json.gz",
+      "sha256": "9c04765031ccb70302a54973935efbc0c3e58bb7669001153d714ef06f299a36"
+    },
+    {
+      "bytes": 16152903,
+      "path": "GSM8968967_tissue_hires_image.png.gz",
+      "sha256": "b9238bf89e13b05cff6085e61326b8c3b33c12543b5f5d7fd9170363a1029b58"
+    },
+    {
+      "bytes": 10974432,
+      "path": "GSM8968967_tissue_positions.parquet.gz",
+      "sha256": "12b927b3761b70a3336dfc4338dc3adeaaead2c5e76c5f193a8f1e93124860ec"
+    }
+  ],
+  "random_seed": 20260902,
+  "spatial_bins": 302297,
+  "spatial_features": 18085,
+  "spatial_nonzero_entries": 15905676,
+  "spatial_permutations": 10000
+}

@@ -1,0 +1,6 @@
+dataset	url	local_path	bytes	sha256	role
+GSE125881	https://ftp.ncbi.nlm.nih.gov/geo/series/GSE125nnn/GSE125881/suppl/GSE125881_raw.expMatrix.csv.gz	data/raw/GSE125881/GSE125881_raw.expMatrix.csv.gz	114573707	243e6e2dd09158e08dcaecfbf35b23122ac3096c1039355b7590474e76d8c02c	processed UMI count matrix
+GSE125881	https://raw.githubusercontent.com/ValentinVoillet/CAR-T/38744ba69a85f4e2e1f492a8602b47a8cc30a65a/meta-data.csv	data/raw/GSE125881/meta-data.csv	7356550	a68f9d1bafce05b666284cdcfc3123923448cfcfd32eb15d6b47649f8016dff2	author cell metadata
+GSE125881	https://ftp.ncbi.nlm.nih.gov/geo/series/GSE125nnn/GSE125881/soft/GSE125881_family.soft.gz	data/raw/GSE125881/GSE125881_family.soft.gz	5747	13a3085bc28fb27228ca858ed935d74b936dbd3f5efc376e485f73ef7b62eb1e	GEO sample-day provenance for the versioned crosswalk
+GSE269379	https://ftp.ncbi.nlm.nih.gov/geo/series/GSE269nnn/GSE269379/suppl/GSE269379_metadata.csv.gz	data/raw/GSE269379/GSE269379_metadata.csv.gz	75220	41ef85c940ff14746025b6a049c1121668d06a2dbbbd48acefe5eaea60fba3ba	author cell metadata
+GSE269379	https://ftp.ncbi.nlm.nih.gov/geo/series/GSE269nnn/GSE269379/suppl/GSE269379_RAW.tar	data/raw/GSE269379/GSE269379_RAW.tar	210903040	c7521fa81e26dbdeb9a63a688ff709902264340876cce8443d1adcff169e5c52	processed 10x and Visium HD archive

@@ -1,0 +1,17 @@
+sample_id	geo_gex_accession	geo_vdj_accession	patient	disease	exact_timepoint	day	geo_time_group	authors_metadata_group	analysis_phase	n_cells
+1	GSM3583861	GSM3583877	CLL-1	CLL	IP	0	IP	IP	IP	5515
+2	GSM3583862	GSM3583878	CLL-1	CLL	d21	21	Early	Early	early_expansion	6722
+3	GSM3583863	GSM3583879	CLL-1	CLL	d38	38	Contraction	Late	contraction	4920
+4	GSM3583864	GSM3583880	CLL-1	CLL	d112	112	Late	Very late	long_term	1736
+5	GSM3583870	GSM3583886	NHL-6	NHL	d12	12	Early	Early	early_expansion	6117
+6	GSM3583871	GSM3583887	NHL-6	NHL	d29	29	Contraction	Late	contraction	6488
+7	GSM3583872	GSM3583888	NHL-6	NHL	d102	102	Late	Very late	long_term	5023
+8	GSM3583865	GSM3583881	CLL-2	CLL	IP	0	IP	IP	IP	1763
+9	GSM3583866	GSM3583882	CLL-2	CLL	d12	12	Early	Early	early_expansion	6271
+10	GSM3583867	GSM3583883	CLL-2	CLL	d29	29	Contraction	Late	contraction	4287
+11	GSM3583868	GSM3583884	CLL-2	CLL	d83	83	Late	Very late	long_term	669
+12	GSM3583873	GSM3583889	NHL-7	NHL	IP	0	IP	IP	IP	3484
+13	GSM3583874	GSM3583890	NHL-7	NHL	d12	12	Early	Early	early_expansion	2459
+14	GSM3583875	GSM3583891	NHL-7	NHL	d28	28	Contraction	Late	contraction	2382
+15	GSM3583876	GSM3583892	NHL-7	NHL	d89	89	Late	Very late	long_term	197
+16	GSM3583869	GSM3583885	NHL-6	NHL	IP	0	IP	IP	IP	4134

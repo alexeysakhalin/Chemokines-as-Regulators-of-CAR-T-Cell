@@ -1,0 +1,2 @@
+endpoint	n_paired_donors	median_car_positive	median_car_negative	median_paired_difference	wilcoxon_statistic	p_value_exact
+Within-donor CXCR6-positive T-cell fraction: CAR-positive versus CAR-negative	5	0.4453125	0.38521401	0.036168133	2	0.1875

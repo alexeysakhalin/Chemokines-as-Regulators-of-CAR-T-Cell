@@ -1,0 +1,2 @@
+query	landmark	radius_um	n_query_bins	observed_fraction_within_radius	null_median	null_q025	null_q975	conditional_p_value	median_nearest_distance_um
+CXCL16-positive bins	myeloid-marker-positive bins	24	960	0.53229167	0.44375	0.41354167	0.475	9.9990001e-05	22.634698

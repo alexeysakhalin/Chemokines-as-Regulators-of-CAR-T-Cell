@@ -10,9 +10,28 @@ Reproducible analysis framework for testing how chemokine signals influence CAR-
 
 ## Project status
 
-This is a development scaffold on `draft/reproducibility-v0.1`. It contains analysis code, data contracts, configuration, a synthetic demonstration dataset, and reporting templates. It does **not** contain patient-level raw data and does **not** report new biological or clinical results. Any inferential output produced from the demonstration dataset is for software testing only.
+This is a development scaffold on `draft/reproducibility-v0.1`. It contains analysis code, data contracts, configuration, a synthetic demonstration dataset, and reporting templates. The root demonstration remains non-evidentiary and is used only for software testing. A separate checksum-pinned module now reports an exploratory secondary reanalysis of the public GSE125881 and GSE269379 datasets.
+
+No new primary data or controlled-access patient files are committed. Third-party cell-level matrices, metadata, and tissue images remain in their source repositories and are retrieved by verified download commands.
 
 The framework will support a public release only after the input datasets, accession identifiers, checksums, analysis configuration, quality-control decisions, and frozen software environment are available and independently verified.
+
+### Public-data reanalysis
+
+The reviewed analysis is isolated in [`analyses/public_reanalysis/`](analyses/public_reanalysis/). It contains exact source URLs and SHA-256 checksums, a patient/day crosswalk, a pinned environment, a deterministic Python workflow, tests, aggregate result tables, and Figure 6 in PNG, PDF, and SVG formats. The analysis keeps donor or patient as the biological unit and treats the single Visium HD specimen as a descriptive case.
+
+From the module directory, reproduce and verify the frozen outputs on Linux with:
+
+```bash
+mamba env create --file environment.yml
+mamba activate cart-public-reanalysis
+make fetch
+make analysis
+make verify
+make test
+```
+
+The module README documents every endpoint and the limits of interpretation, including the IIH comparator, the single spatial case, sparse CXCR6 transcript detection, and the inability of RNA data to distinguish soluble from membrane-bound CXCL16.
 
 ## Scientific scope
 
