@@ -23,3 +23,7 @@ Symbol sizes are enlarged for visibility and do not represent the physical 8-µm
 ## Interpretation boundary
 
 The markers denote transcript-positive spatial bins, not individually segmented cells and not proven CAR-T identities. A single section cannot establish a protein gradient, distinguish soluble from membrane-bound CXCL16, or demonstrate migration, retention, egress, efficacy, neurotoxicity, or causality. The panel remains repository-only and is not required for the manuscript's one-paragraph bioinformatic summary.
+
+## Attribution and reuse
+
+The histology background is adapted from Lu et al. (2025), GSE269379/GSM8968967. The associated publication is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); its [rights notice](https://link.springer.com/article/10.1186/s13073-025-01498-6#rightslink) requires attribution and identification of modifications. The crop and coordinate overlay are the modifications described above. The original source image is downloaded locally and is not redistributed as a standalone file. See [third-party notices](../../../THIRD_PARTY_NOTICES.md).

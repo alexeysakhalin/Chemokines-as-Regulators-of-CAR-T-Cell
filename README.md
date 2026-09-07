@@ -8,13 +8,13 @@ Reproducible analysis framework for testing how chemokine signals influence CAR-
 4. functional chemotaxis, retention, and egress assays;
 5. paired comparison of a chemokine-modified CAR-T product with an otherwise identical CAR-T control.
 
-## Project status
+## Publication analysis
 
-This is a development scaffold on `draft/reproducibility-v0.1`. It contains analysis code, data contracts, configuration, a synthetic demonstration dataset, and reporting templates. The root demonstration remains non-evidentiary and is used only for software testing. A separate checksum-pinned module reports the original descriptive GSE125881/GSE269379 work and an exploratory patient-level longitudinal extension using GSE197268, GSE235760, GSE162975, and GSE273170.
+Version 1.0.0 contains an exploratory public-data reanalysis of GSE125881, GSE269379, GSE197268, GSE235760, GSE162975, and GSE273170. The scientific analysis is in [`analyses/public_reanalysis/`](analyses/public_reanalysis/). The root package provides reusable analysis functions and a synthetic demonstration used only for software testing. Synthetic outputs are not biological evidence.
 
 No new primary data or controlled-access patient files are committed. Third-party cell-level matrices, metadata, and tissue images remain in their source repositories and are retrieved by verified download commands.
 
-The framework will support a public release only after the input datasets, accession identifiers, checksums, analysis configuration, quality-control decisions, and frozen software environment are available and independently verified.
+The release records source files, cohort eligibility, endpoints, software versions, code, and frozen results. See [release notes](CHANGELOG.md) and [third-party attribution](THIRD_PARTY_NOTICES.md).
 
 ### Public-data reanalysis
 
@@ -46,6 +46,7 @@ The paired comparison is defined at the biological-unit level. Whenever possible
 
 ```text
 .
+├── analyses/public_reanalysis/ # public-cohort scientific analysis and frozen results
 ├── config/                  # analysis configuration and input manifest
 ├── data/
 │   └── demo/               # synthetic inputs for software testing
@@ -68,7 +69,7 @@ The paired comparison is defined at the biological-unit level. Whenever possible
 The commands below run the synthetic demonstration and do not download controlled patient data.
 
 ```bash
-git clone --branch draft/reproducibility-v0.1 \
+git clone --branch main \
   https://github.com/alexeysakhalin/Chemokines-as-Regulators-of-CAR-T-Cell.git
 cd Chemokines-as-Regulators-of-CAR-T-Cell
 
@@ -133,7 +134,7 @@ configuration overlays are not supported.
 
 The pipeline writes single-cell state fractions, mean and paired-change confidence intervals, separate RNA/ADT pseudobulk tables, sample QC, and missingness tables; spatial distance and patient-equal neighborhood tables; and functional/protein biological summaries and QC files. Exact filenames are declared in `Snakefile`. Data-derived panels may be exported as PDF, SVG, and 300-dpi PNG together with `figure_manifest.tsv`; the currently frozen spatial overlay remains repository-only. The synthetic-only demonstration is allowed but explicitly marked non-evidentiary. With the default evidence policy, any other analysis stops before scientific stages when even one manifest record has `evidence_eligible=false`.
 
-The draft does not yet process raw FASTQ files, call cells, normalize CITE-seq, segment/register raw tissue images, or extract tracks from microscope files. Those upstream operations must be supplied as versioned, checksum-verified inputs until dedicated workflow stages are implemented and tested.
+The root package starts from annotated tables. It does not process raw FASTQ files, call cells, normalize CITE-seq, segment/register raw tissue images, or extract tracks from microscope files. The public reanalysis starts from deposited processed count matrices and author annotations; those upstream processing steps are outside its scope.
 
 ## Required inputs
 
@@ -143,7 +144,7 @@ Raw data are not committed to Git. Controlled-access files remain in their autho
 
 ### Public and third-party datasets
 
-The repository does not redistribute third-party raw counts, FASTQ files, clinical tables, or tissue images. Instead, [`config/public_datasets.tsv`](config/public_datasets.tsv) records an exact repository URL, retrieval date, expected byte size, SHA-256 digest, access class, source terms, primary citation, and ignored local destination for each file that has been independently verified. [`docs/PUBLIC_DATASETS.md`](docs/PUBLIC_DATASETS.md) separates what each accession can support from what it cannot establish.
+The repository does not redistribute complete third-party count matrices, FASTQ files, source clinical tables, or source tissue images. It includes derived patient-level summaries, source-defined coded identifiers and clinical categories used to audit pairing, and a histology-based derived visualization with source attribution. These materials remain subject to their source terms; see [third-party notices](THIRD_PARTY_NOTICES.md). [`config/public_datasets.tsv`](config/public_datasets.tsv) records an exact repository URL, retrieval date, expected byte size, SHA-256 digest, access class, source terms, primary citation, and ignored local destination for each file that has been independently verified. [`docs/PUBLIC_DATASETS.md`](docs/PUBLIC_DATASETS.md) separates what each accession can support from what it cannot establish.
 
 List, retrieve, and verify the currently checksum-pinned public inputs with:
 
@@ -162,9 +163,9 @@ An external dataset is cited by both its primary publication and persistent acce
 - The patient or independent donor is the unit of inference.
 - Modified and control products are paired only when they originate from the same biological starting material and have matched manufacturing conditions.
 - The current runner writes patient-level pseudobulk count tables for downstream differential-expression modelling; it does not yet fit that model. Future differential-expression inference must use patient-level pseudobulk or an explicitly hierarchical model rather than treating cells as independent replicates.
-- Bootstrap intervals emitted by the current draft are descriptive patient-level summaries. Confirmatory cell-state comparisons require the prespecified compositional or binomial/beta-binomial model described in the analysis plan; that model is not yet implemented by this runner.
+- Bootstrap intervals emitted by the root package are descriptive patient-level summaries. Confirmatory cell-state comparisons require the prespecified compositional or binomial/beta-binomial model described in the analysis plan; that model is not yet implemented by this runner.
 - Spatial endpoints are summarized per patient or independent specimen before cohort inference. Confirmatory real-data analyses must use tissue-compartment- or mask-constrained spatial null models; the current runner implements only patient/section blocking.
-- Multiplicity is controlled within prespecified endpoint families using the Benjamini-Hochberg false-discovery rate.
+- The public longitudinal extension uses Holm adjustment across its three early CXCR6 comparisons and Benjamini-Hochberg adjustment for marker-set tests within cohort and contrast. The root package uses the multiplicity procedures documented in its analysis plan.
 - Missingness, sample attrition, excluded regions, and failed assays are reported explicitly; no result is generated from absent raw data.
 
 The complete endpoint hierarchy and model formulas are described in [Analysis plan](docs/ANALYSIS_PLAN.md).
@@ -209,7 +210,6 @@ These references justify the measurement strategy; they do not substitute for va
 - [Data requirements](docs/DATA_REQUIREMENTS.md)
 - [Experimental validation](docs/EXPERIMENTAL_VALIDATION.md)
 - [Reproducibility](docs/REPRODUCIBILITY.md)
-- [BioRender figure prompts](docs/BIORENDER_PROMPTS.md)
 
 ## Citation and license
 

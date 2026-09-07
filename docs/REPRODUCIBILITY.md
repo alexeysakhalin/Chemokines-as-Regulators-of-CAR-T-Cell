@@ -4,7 +4,7 @@
 
 A figure or table is reproducible only when it can be regenerated from immutable inputs in a clean Linux environment using a recorded command, configuration, code commit, software environment, and random seed. A rendered image without its source table and provenance is not considered reproducible.
 
-The repository currently provides a workflow scaffold and synthetic demonstration data. Real-data results must not be reported until all required inputs pass accession, checksum, schema, and pairing validation.
+The public-data scientific analysis is documented in [`analyses/public_reanalysis/README.md`](../analyses/public_reanalysis/README.md). It has its own environment, input manifests, deterministic commands, and frozen results. The guide below describes the separate root package and its synthetic demonstration. The two environments have different dependency versions and must be created separately.
 
 ## Supported platform
 
@@ -19,10 +19,10 @@ Run all commands from the repository root. Do not execute the workflow from a di
 
 ## Clean installation
 
-Clone the development branch:
+Clone the publication version:
 
 ```bash
-git clone --branch draft/reproducibility-v0.1 \
+git clone --branch v1.0.0 \
   https://github.com/alexeysakhalin/Chemokines-as-Regulators-of-CAR-T-Cell.git
 cd Chemokines-as-Regulators-of-CAR-T-Cell
 git status --short
@@ -309,9 +309,9 @@ A complete run through the `report` stage automatically records:
 - `requirements.lock.txt` and `environment.yml` byte sizes and SHA-256 digests;
 - generated-output byte sizes and SHA-256 digests.
 
-Before a scientific release, additionally archive:
+For an independently reproduced analysis, retain:
 
-- repository URL, branch, and signed release tag;
+- repository URL, exact commit, and release tag;
 - run start and finish timestamps and the exact outer Snakemake or Make command;
 - explicit Conda export or immutable container digest;
 - rule-level logs;
@@ -361,22 +361,11 @@ At minimum the test suite should cover:
 
 ## Branch and release policy
 
-Development occurs on `draft/reproducibility-v0.1`. This branch may contain incomplete modules and synthetic outputs. It is not a scientific release.
+`main` is the publication branch. Cite the immutable `v1.0.0` release or its exact commit when reproducing this version. The retained development branch records the analysis history; it is not the preferred citation target.
 
-Before merging a clean version to `main`:
+The release includes fixed endpoints, audited sample crosswalks, source-file checksums, pinned environments, tests, and frozen output tables. Source data remain in their originating repositories. The source studies and any applicable reuse conditions must be cited separately from this software.
 
-1. freeze the analysis plan and endpoint definitions;
-2. validate every real input accession, license, byte size, and checksum;
-3. confirm that no controlled or identifying data are staged in Git history;
-4. run the workflow from a fresh clone and fresh environment;
-5. compare generated tables and figures with the candidate manuscript outputs;
-6. obtain independent review of sample pairing, exclusions, and statistics;
-7. pass the complete test suite;
-8. update `CITATION.cff`, version, changelog, and data-availability statement;
-9. merge by reviewed pull request;
-10. create a signed version tag and archive that exact commit in a persistent repository.
-
-A Git tag alone is not sufficient. A release must resolve all external inputs through stable accessions and checksums and must identify the exact container or environment lock.
+Independent reproduction should use a fresh checkout and the environment for the relevant module, then compare all generated outputs with the frozen tables using the documented verifier. An archival DOI may be added once that exact release has been deposited; no DOI is asserted here.
 
 ## Independent reproduction checklist
 
