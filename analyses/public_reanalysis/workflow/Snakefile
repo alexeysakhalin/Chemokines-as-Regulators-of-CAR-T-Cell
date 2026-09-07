@@ -1,6 +1,7 @@
 rule all:
     input:
-        "results/local/SHA256SUMS"
+        "results/local/SHA256SUMS",
+        "results/longitudinal_extension/local/SHA256SUMS"
 
 
 rule fetch:
@@ -34,3 +35,54 @@ rule analysis:
         "--metadata data/raw/GSE269379/GSE269379_metadata.csv.gz "
         "--raw-dir data/raw/GSE269379/extracted "
         "--output-dir results/local --seed 20260902 --spatial-permutations 10000"
+
+
+rule fetch_longitudinal:
+    output:
+        "data/raw/GSE197268/Fig1_CART_global_obs.csv",
+        "data/raw/GSE197268/Fig2_ALLT_CD_classifications.txt",
+        "data/raw/GSE197268/GSM5911994_Patient7-D7-CART.tar.gz",
+        "data/raw/GSE197268/GSM5911995_Patient7-Infusion.tar.gz",
+        "data/raw/GSE197268/GSM5911998_Patient8-Infusion.tar.gz",
+        "data/raw/GSE197268/GSM5911999_Patient8-D7-CART.tar.gz",
+        "data/raw/GSE197268/GSM5912002_Patient9-Infusion.tar.gz",
+        "data/raw/GSE197268/GSM5912003_Patient9-D7-CART.tar.gz",
+        "data/raw/GSE197268/GSM5912024_Patient15-D7-CART.tar.gz",
+        "data/raw/GSE197268/GSM5912026_Patient15-Infusion.tar.gz",
+        "data/raw/GSE197268/GSM5912027_Patient16-D7-CART.tar.gz",
+        "data/raw/GSE197268/GSM5912028_Patient16-Infusion.tar.gz",
+        "data/raw/GSE197268/GSM5912067_Patient26-Infusion.tar.gz",
+        "data/raw/GSE197268/GSM5912068_Patient26-D7-CART.tar.gz",
+        "data/raw/GSE197268/GSM5912070_Patient27-D7-CART.tar.gz",
+        "data/raw/GSE197268/GSM5912071_Patient27-Infusion.tar.gz",
+        "data/raw/GSE197268/GSM5912076_Patient29-Infusion.tar.gz",
+        "data/raw/GSE197268/GSM5912078_Patient29-D7-CART.tar.gz",
+        "data/raw/GSE197268/GSM5912089_Patient32-Infusion.tar.gz",
+        "data/raw/GSE197268/GSM5912090_Patient32-D7-CART.tar.gz",
+        "data/raw/GSE162975/GSE162975_CART_BALL_UMI.csv.gz",
+        "data/raw/GSE162975/GSE162975_readme_singlecells_barcodes.txt",
+        "data/raw/GSE235760/2aad61a0-31b8-41f5-8b8a-dbd971269f7b.h5ad",
+        "data/raw/GSE273170/GSE273170_RAW.tar",
+    shell:
+        "python scripts/fetch_longitudinal_inputs.py"
+
+
+rule longitudinal_extension:
+    input:
+        downloaded=rules.fetch_longitudinal.output,
+        gse197268_crosswalk="config/gse197268_sample_crosswalk.tsv",
+        gse162975_crosswalk="config/gse162975_technical_crosswalk.tsv",
+        gse273170_crosswalk="config/gse273170_crosswalk.tsv",
+        contrasts="config/longitudinal_contrasts.tsv",
+    output:
+        "results/longitudinal_extension/local/SHA256SUMS"
+    shell:
+        "PYTHONHASHSEED=20260902 python scripts/run_longitudinal_extension.py "
+        "--gse197268-dir data/raw/GSE197268 "
+        "--gse197268-obs data/raw/GSE197268/Fig1_CART_global_obs.csv "
+        "--gse197268-subtype data/raw/GSE197268/Fig2_ALLT_CD_classifications.txt "
+        "--gse162975-matrix data/raw/GSE162975/GSE162975_CART_BALL_UMI.csv.gz "
+        "--gse235760-h5ad "
+        "data/raw/GSE235760/2aad61a0-31b8-41f5-8b8a-dbd971269f7b.h5ad "
+        "--gse273170-archive data/raw/GSE273170/GSE273170_RAW.tar "
+        "--output-dir results/longitudinal_extension/local --seed 20260902"

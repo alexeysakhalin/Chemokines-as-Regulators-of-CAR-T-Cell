@@ -1,0 +1,7 @@
+dataset	contrast	baseline_stage	followup_stage	min_cells	role	family_id
+GSE197268	D7-CART_minus_IP	IP	D7-CART	25	principal independent early comparison	early_cxcr6_fraction_three_cohort
+GSE235760	Peak_minus_IP	IP	Peak	25	independent early comparison	early_cxcr6_fraction_three_cohort
+GSE162975	T1_minus_T0	T0	T1	25	independent early replication	early_cxcr6_fraction_three_cohort
+GSE162975	T3-or-T4.5_minus_T1	T1	T3-or-T4.5	25	exploratory post-peak comparison	none
+GSE162975	T6-plus_minus_T1	T1	T6-plus	25	exploratory extended follow-up	none
+GSE273170	D14_minus_D7	D7	D14	10	supportive post-peak sensitivity comparison	none

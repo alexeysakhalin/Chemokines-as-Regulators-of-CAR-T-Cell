@@ -1,0 +1,84 @@
+{
+  "analysis": "patient-level longitudinal CXCR6 public-cohort extension",
+  "analysis_status": "finalized exploratory workflow",
+  "audit_outputs": {
+    "gse197268_product_stratified_results.tsv": "1dbec5570203783996a2a09131d7e53ee1424a6d84fc9255aaaa3750207039bd",
+    "gse197268_screening_exclusions.tsv": "ac46a3cdbc19e9be0bba3ba4df98cf1f0b48958353664c63f85b57d57666db47"
+  },
+  "audited_patient_rows": {
+    "results/longitudinal_extension/frozen/audit/gse162975_verified_contrast_pairs.tsv": "cf2a31eadc59d70dc3fc210aae1f4f784f0301c68f03a575f3b40a1ddf298b9c",
+    "results/longitudinal_extension/frozen/audit/gse162975_verified_stage_aggregates.tsv": "1695d367660fac69391c700b6a6498e317c2137b94ca30dd79e203a18fab12e2",
+    "results/longitudinal_extension/frozen/audit/gse197268_product_stratified_results.tsv": "dcadcdc45bde9c6418a2ade3f1bb41d44d9eac8048d7cfe177050633b88fe903",
+    "results/longitudinal_extension/frozen/audit/gse197268_screening_exclusions.tsv": "9fbc38deb5bc29e78bb7bbfddd3ff46f9b0c8da0a965d89f564e0d95ad7d4a6f",
+    "results/longitudinal_extension/frozen/audit/gse197268_verified_patient_aggregates.tsv": "4567eb0e44403da5dd70282272f01ee16e8d3cd6f038829ea7303b1c5c0e2c89",
+    "results/longitudinal_extension/frozen/audit/gse235760_verified_patient_aggregates.tsv": "aee33bd2243ded2abb99a057f5a78d7070da9c9dec3a3f350e8fff03a59e75a9",
+    "results/longitudinal_extension/frozen/audit/gse273170_verified_patient_aggregates.tsv": "84206d4f99326fbcf7831eb51c913afd83039fcce61475be778ad2aa252559cc"
+  },
+  "canonical_outputs": {
+    "REPORT.md": "cf8fa99f8a8fe788d6dc636a089cde329c77ec337d7990bda3045ddfbfb0f244",
+    "contrast_inclusion.tsv": "6ba7680a30e49bd94ba387e29fa2ac1f38ca61cf05cbf477b0e0d582b308e78a",
+    "contrast_results.tsv": "83fdbedfc9101f417f56478ea1f0eef5a9967ff058ec2d22b794e2892d8ca233",
+    "gse197268_product_stratified_results.tsv": "1dbec5570203783996a2a09131d7e53ee1424a6d84fc9255aaaa3750207039bd",
+    "gse197268_screening_exclusions.tsv": "ac46a3cdbc19e9be0bba3ba4df98cf1f0b48958353664c63f85b57d57666db47",
+    "leave_one_out.tsv": "c9a163364f0b6ab0ea480f6dddec7d74477ef80ff5fb6451dff4b00abdea6d3b",
+    "marker_aggregates.tsv": "c472501ee1ba508cc9190b5aedd61a3b17ad3d453b86785f191650fece5d11cb",
+    "marker_contrast_results.tsv": "a35d06c3f3952442edf604e1fcd50ea7c3b64d47d2fb313df91090932905936c",
+    "sample_aggregates.tsv": "c88b381f15e46c43e0af600cf7f97dde0b920f7ab1b571d8e4e6f0218d289502"
+  },
+  "cell_level_p_values": false,
+  "code": {
+    "longitudinal_extension/__init__.py": "d983adae020ce2ccbc215f6d8fd2a2e414ac2c18f5c6dd537a18d02f3f6ea0fc",
+    "longitudinal_extension/analysis.py": "bafb0c776fcdf9b4b060670b119c317078a1ec1fe4cb947a165ce1a26a47da7e",
+    "longitudinal_extension/common.py": "7ab50d22d2d22f2195ccca4d7b081e198bf88c88c6440fe39616f91fd881f469",
+    "longitudinal_extension/constants.py": "e97b88d0725146b40c491f76d741ec1e897034c7923d407f3bbb593ea7e24fcb",
+    "longitudinal_extension/output.py": "51ab8eada29e0656b3c75035ab015ced976f9833f84fd4707161dc04c7cee084",
+    "longitudinal_extension/parsers.py": "ab1ceb1dd279b805bb283bad997771cbc4b10ad50c258ec37efd141ead24cbbc",
+    "longitudinal_extension/sources.py": "74115aaf24540e91fa48e5dccaa6cd4d74732727dcdd6bf60ecccaee2982123d",
+    "longitudinal_extension/verification.py": "44d821952b2b224f1b79e99578ca56d0c27014543dea79a14b60e0abc97c6161",
+    "scripts/run_longitudinal_extension.py": "bcd8638ed305d9feffca16c5c8d44de8b665fa25db1fe25866b6d4a2d737405f"
+  },
+  "cross_study_pooling": false,
+  "early_family": [
+    "GSE197268:D7-CART_minus_IP",
+    "GSE235760:Peak_minus_IP",
+    "GSE162975:T1_minus_T0"
+  ],
+  "frozen_date": "2026-09-07",
+  "independent_unit": "patient",
+  "inputs": {
+    "config/gse162975_crosswalk.tsv": "8942f0b8527b207f9c6e00b27440367b6568938e03fe1d11a31d443f43b42cd9",
+    "config/gse162975_technical_crosswalk.tsv": "188015ce57d1f3039253b30027b7bc21bb0ca55e056c80a466c2d275b0c337df",
+    "config/gse197268_sample_crosswalk.tsv": "4088980f8845b5cccc0381873a3c7a23f67d3ac4276871e0376800b2c43aaa1b",
+    "config/gse273170_crosswalk.tsv": "18d849fc061b49827d531eeb2887b1bc4cf68991dbe12d708b75cfc19371dfcb",
+    "config/longitudinal_contrasts.tsv": "cd1784fb9c6e1d9b40c7223afd8d9ac45f22eaf1a9e53c73c609cd15f5d92795",
+    "source/sha256/0c0a537ce9dd1549601d5f81d8370515fcbb7d395360e2bf3e69037ddd497a51": "0c0a537ce9dd1549601d5f81d8370515fcbb7d395360e2bf3e69037ddd497a51",
+    "source/sha256/2fa45ca581d3fd6fb688feabf85428651e80c7deb0df0a674eeda1e63dcbaf4c": "2fa45ca581d3fd6fb688feabf85428651e80c7deb0df0a674eeda1e63dcbaf4c",
+    "source/sha256/32afc0462ef32210082a2bbc26a5fecde5555f68c04273b32c751965243c4341": "32afc0462ef32210082a2bbc26a5fecde5555f68c04273b32c751965243c4341",
+    "source/sha256/3662ae92a0cc35e208094c50b7cb00453625909851c3ef09163f79cad68bf25d": "3662ae92a0cc35e208094c50b7cb00453625909851c3ef09163f79cad68bf25d",
+    "source/sha256/42cc8c0ecd633e941ac58627179f7e5a66fd6783b39d514c4dae2d9d24116a14": "42cc8c0ecd633e941ac58627179f7e5a66fd6783b39d514c4dae2d9d24116a14",
+    "source/sha256/4c07047032bce618d6b3b70be709be1f8f971068acf4e965ec1c5b75952cada1": "4c07047032bce618d6b3b70be709be1f8f971068acf4e965ec1c5b75952cada1",
+    "source/sha256/52d7297f03d8bdce80dea4e29d2e1cbbf62d198242dbb288b12edf46b714ac07": "52d7297f03d8bdce80dea4e29d2e1cbbf62d198242dbb288b12edf46b714ac07",
+    "source/sha256/574a466f0b8929f6fe5fb9eb1898f1e372d617226555f60c974f1bbad9b2d333": "574a466f0b8929f6fe5fb9eb1898f1e372d617226555f60c974f1bbad9b2d333",
+    "source/sha256/59b043c243ffce531e1059296916b6cb8d17e1ec565c04a1ee37d1ee7d8f5838": "59b043c243ffce531e1059296916b6cb8d17e1ec565c04a1ee37d1ee7d8f5838",
+    "source/sha256/69c6c69bc8aac85733fc74e34b33e5ea9737c2b6a48c0caa6b554267119efa22": "69c6c69bc8aac85733fc74e34b33e5ea9737c2b6a48c0caa6b554267119efa22",
+    "source/sha256/6ab0bd02274d56a71d14e626ce1e22af6eb4f1f642c48b16a86fecee89e60721": "6ab0bd02274d56a71d14e626ce1e22af6eb4f1f642c48b16a86fecee89e60721",
+    "source/sha256/6de66da05f426a179ed0caab3eb882698f7617db21508e82f1a690509a283d8d": "6de66da05f426a179ed0caab3eb882698f7617db21508e82f1a690509a283d8d",
+    "source/sha256/6e255f514efb7a10873a15d131386ce5517bfa71a31c60c9c62f8aece22c0533": "6e255f514efb7a10873a15d131386ce5517bfa71a31c60c9c62f8aece22c0533",
+    "source/sha256/6f273600a888d8e9f74fc2751439a6dfc9efe39fea6be34a0f374c49e0c4f007": "6f273600a888d8e9f74fc2751439a6dfc9efe39fea6be34a0f374c49e0c4f007",
+    "source/sha256/9230a1c99ab1bfa13a1f77d598ba6ab77e6ac400ce7c03c1450d8ccaf4a95f88": "9230a1c99ab1bfa13a1f77d598ba6ab77e6ac400ce7c03c1450d8ccaf4a95f88",
+    "source/sha256/9671ec215a2897a4bbc5283500f334a90f192d720aa007108452ca6bee249c83": "9671ec215a2897a4bbc5283500f334a90f192d720aa007108452ca6bee249c83",
+    "source/sha256/9c63c2d8d3b3ce6d1f3e3375ca7c6a121e673024b94be34b63997c81575b6be0": "9c63c2d8d3b3ce6d1f3e3375ca7c6a121e673024b94be34b63997c81575b6be0",
+    "source/sha256/a2d56ac86f6638b59be5b5214e704413e36fde38b0daa458c1cb4a62371c0dd6": "a2d56ac86f6638b59be5b5214e704413e36fde38b0daa458c1cb4a62371c0dd6",
+    "source/sha256/af0b20e4ffce804425dfa922753120b3bd9f66e188bae6999bf02b9b3d43e21f": "af0b20e4ffce804425dfa922753120b3bd9f66e188bae6999bf02b9b3d43e21f",
+    "source/sha256/cda04cbe7f02ea7231441dcb3e292c3977a751c19535e3b42d9bb353872f4f2e": "cda04cbe7f02ea7231441dcb3e292c3977a751c19535e3b42d9bb353872f4f2e",
+    "source/sha256/d9104d3c74167804bf3f69cfe6a98d5088d013eccbc94d71af04d49812fe3d19": "d9104d3c74167804bf3f69cfe6a98d5088d013eccbc94d71af04d49812fe3d19",
+    "source/sha256/db4218708b17eacb9c6c48744a16c56356f4e2e336e31398babf69e1e1fa2fb0": "db4218708b17eacb9c6c48744a16c56356f4e2e336e31398babf69e1e1fa2fb0",
+    "source/sha256/e8261936016d8a4110403d997208c06c62541ecda5f5cb75ae862775689759f1": "e8261936016d8a4110403d997208c06c62541ecda5f5cb75ae862775689759f1"
+  },
+  "python_requirement": ">=3.11,<3.12",
+  "seed": 20260902,
+  "source_manifest": {
+    "path": "config/longitudinal_sources.tsv",
+    "sha256": "e3aecb3232a6c545deb9e975ef832c9775be877ef204eaa88545ea8823f52fe4"
+  }
+}

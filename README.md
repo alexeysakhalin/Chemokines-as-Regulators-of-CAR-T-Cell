@@ -10,7 +10,7 @@ Reproducible analysis framework for testing how chemokine signals influence CAR-
 
 ## Project status
 
-This is a development scaffold on `draft/reproducibility-v0.1`. It contains analysis code, data contracts, configuration, a synthetic demonstration dataset, and reporting templates. The root demonstration remains non-evidentiary and is used only for software testing. A separate checksum-pinned module now reports an exploratory secondary reanalysis of the public GSE125881 and GSE269379 datasets.
+This is a development scaffold on `draft/reproducibility-v0.1`. It contains analysis code, data contracts, configuration, a synthetic demonstration dataset, and reporting templates. The root demonstration remains non-evidentiary and is used only for software testing. A separate checksum-pinned module reports the original descriptive GSE125881/GSE269379 work and an exploratory patient-level longitudinal extension using GSE197268, GSE235760, GSE162975, and GSE273170.
 
 No new primary data or controlled-access patient files are committed. Third-party cell-level matrices, metadata, and tissue images remain in their source repositories and are retrieved by verified download commands.
 
@@ -18,7 +18,7 @@ The framework will support a public release only after the input datasets, acces
 
 ### Public-data reanalysis
 
-The reviewed analysis is isolated in [`analyses/public_reanalysis/`](analyses/public_reanalysis/). It contains exact source URLs and SHA-256 checksums, a patient/day crosswalk, a pinned environment, a deterministic Python workflow, tests, aggregate result tables, and Figure 6 in PNG, PDF, and SVG formats. The analysis keeps donor or patient as the biological unit and treats the single Visium HD specimen as a descriptive case.
+The reviewed analysis is isolated in [`analyses/public_reanalysis/`](analyses/public_reanalysis/). It contains exact source URLs and SHA-256 checksums, cohort-specific crosswalks, a pinned environment, deterministic Python workflows, tests, and frozen aggregate results. The analysis keeps the patient as the biological unit. The GSE269379 Visium HD overlay is a repository-only descriptive visualization with a dedicated provenance record; it is not an additional manuscript figure.
 
 From the module directory, reproduce and verify the frozen outputs on Linux with:
 
@@ -28,10 +28,13 @@ mamba activate cart-public-reanalysis
 make fetch
 make analysis
 make verify
+make fetch-longitudinal
+make longitudinal
+make verify-longitudinal
 make test
 ```
 
-The module README documents every endpoint and the limits of interpretation, including the IIH comparator, the single spatial case, sparse CXCR6 transcript detection, and the inability of RNA data to distinguish soluble from membrane-bound CXCL16.
+The module README documents every endpoint and the limits of interpretation, including the modest number of eligible patient pairs, the IIH comparator, the single spatial case, sparse CXCR6 transcript detection, and the inability of RNA data to distinguish soluble from membrane-bound CXCL16.
 
 ## Scientific scope
 
@@ -128,7 +131,7 @@ configuration overlays are not supported.
 - The spatial module validates coordinates, calculates distances to vascular, stromal, tumor, and ligand-source landmarks, summarizes edge-bearing sections with equal section weight per patient, and calculates patient-equal neighborhood enrichment with false-discovery-rate correction under a patient/section-blocked label-permutation null. Its p/q values test conditional spatial association in the observed tissues, not a population-level patient effect. Real-data confirmatory inference additionally requires validated compartment or tissue-mask strata, prespecified minimum graph support per section, and a separate patient-level model; those steps are not yet implemented by the runner.
 - The functional module aggregates technical replicates within independent biological replicates, compares paired products, and generates dose-response, migration, and paired-comparison figures. Soluble CXCL16 concentration and membrane CXCL16 fluorescence are summarized separately unless a common calibrated unit and assay have been explicitly validated.
 
-The pipeline writes single-cell state fractions, mean and paired-change confidence intervals, separate RNA/ADT pseudobulk tables, sample QC, and missingness tables; spatial distance and patient-equal neighborhood tables; and functional/protein biological summaries and QC files. Exact filenames are declared in `Snakefile`. Figure 6 panels are exported as PDF, SVG, and 300-dpi PNG together with `figure_manifest.tsv`. The synthetic-only demonstration is allowed but explicitly marked non-evidentiary. With the default evidence policy, any other analysis stops before scientific stages when even one manifest record has `evidence_eligible=false`.
+The pipeline writes single-cell state fractions, mean and paired-change confidence intervals, separate RNA/ADT pseudobulk tables, sample QC, and missingness tables; spatial distance and patient-equal neighborhood tables; and functional/protein biological summaries and QC files. Exact filenames are declared in `Snakefile`. Data-derived panels may be exported as PDF, SVG, and 300-dpi PNG together with `figure_manifest.tsv`; the currently frozen spatial overlay remains repository-only. The synthetic-only demonstration is allowed but explicitly marked non-evidentiary. With the default evidence policy, any other analysis stops before scientific stages when even one manifest record has `evidence_eligible=false`.
 
 The draft does not yet process raw FASTQ files, call cells, normalize CITE-seq, segment/register raw tissue images, or extract tracks from microscope files. Those upstream operations must be supplied as versioned, checksum-verified inputs until dedicated workflow stages are implemented and tested.
 

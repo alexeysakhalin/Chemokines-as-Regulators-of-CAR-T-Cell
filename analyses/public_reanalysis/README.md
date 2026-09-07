@@ -1,55 +1,89 @@
 # Public single-cell and spatial reanalysis
 
-This module reproduces the exploratory secondary analysis reported in Figure 6 of the revised review. It uses two independent public datasets and keeps their biological units and clinical contexts separate:
+This module contains two related but analytically separate components:
 
-- **GSE125881**: 62,167 author-filtered CD8-positive CAR-T cells from four patients, measured in the infusion product and at early (days 12–21), contraction/late (days 28–38), and very-late (days 83–112) post-infusion phases.
-- **GSE269379**: author-curated cerebrospinal-fluid single-cell metadata from five patients sampled during ICANS and four idiopathic-intracranial-hypertension comparators, plus one Visium HD section from a fatal ICANS case.
+1. the original descriptive GSE125881 longitudinal and GSE269379 ICANS/spatial reanalysis;
+2. a patient-level longitudinal extension using independently audited public cohorts GSE197268, GSE235760, GSE162975, and GSE273170.
 
-The analysis is deliberately narrow. For GSE125881, it summarizes transcript detection across defined genes and marker sets; for GSE269379, it uses the authors' CAR, CXCR6, and cell-type annotations. It does not re-cluster either dataset, infer a new cell atlas, or pool cells across patients as independent replicates. The GSE269379 spatial specimen is a single case. Its CXCL16 map is descriptive, and sparse CXCR6 transcript detection cannot establish transcript-level proximity, a functional protein gradient, direction of migration, or the membrane-bound versus soluble CXCL16 proteoform.
+Cells are never treated as independent biological replicates. Patient-level values are constructed within each cohort, and cohorts are reported separately without pooled cell-level testing or cross-study batch correction.
 
-## Reproduce on Linux
+## Main longitudinal result
 
-From this directory:
+The public extension does not support a universal early increase in the fraction of CAR-T cells with detectable CXCR6 transcript. Early cohort medians were positive in GSE197268 and GSE235760 but slightly negative in GSE162975, and none of the three exact patient-level sign tests was significant after Holm adjustment. The later GSE162975 and GSE273170 summaries were directionally lower but small and exploratory. These observations are consistent with temporal and study-context heterogeneity, not a causal trafficking mechanism.
+
+The finalized paired results are:
+
+| Cohort | Contrast | Eligible patients | Median change | Direction | Exact P | Holm P |
+|---|---|---:|---:|---:|---:|---:|
+| GSE197268 | D7-CART − infusion product | 9 | +23.63 percentage points | 7/9 increased | 0.1797 | 0.5391 |
+| GSE235760 | expansion peak − infusion product | 5 | +1.36 percentage points | 4/5 increased | 0.3750 | 0.7500 |
+| GSE162975 | T1 − T0 | 10 | −0.93 percentage points | 4/10 increased | 0.7539 | 0.7539 |
+| GSE162975 | first T3/T4.5 − T1 | 7 | −15.70 percentage points | 6/7 decreased | 0.1250 | not in early family |
+| GSE162975 | first T6-or-later − T1 | 5 | −1.60 percentage points | 3/5 decreased | 1.0000 | not in early family |
+| GSE273170 | D14 − D7 | 4 | −14.70 percentage points | 3/4 decreased | 0.6250 | not in early family |
+
+The first three rows form the three-test early comparison family in the finalized exploratory workflow. This wording is deliberate: the workflow was fixed after feasibility checks and is not a prospective preregistration.
+
+## Why the paired n is small
+
+The limiting quantity is not the number of deposited cells or the advertised study cohort size. A patient must have both required biological stages, recoverable CAR-T identity under a cohort-specific public definition, the locked cell stratum, and the minimum eligible-cell denominator at both stages. Missing stages, unsorted aliquots, retreatment courses, sparse CAR-transcript detection, and incomplete public annotations reduce the eligible patient count before inference.
+
+For GSE197268 specifically, 21 patients had author-QC metadata at both infusion product and D7-CART. The outcome-blind denominator screen retained nine with at least 25 author-QC CAR-positive CD8 T cells at each stage and excluded 12 below that threshold. The repository records all 21 decisions; only the 18 raw bundles belonging to the nine eligible patients are fetched for CXCR6 reconstruction.
+
+GSE290722 was specifically audited and excluded from the declared longitudinal CAR-T endpoint. Its repeated-timepoint public metadata do not identify CAR-T cells, while the relevant publisher source-data sheet contains only 128 week-4 cell records from 13 patients. It therefore contributes no infusion-product-to-post-infusion CAR-T pair under the locked definition. The workbook identity, checksum, sheet, and record counts are documented in [`docs/longitudinal_extension/GSE290722_SCREENING.md`](docs/longitudinal_extension/GSE290722_SCREENING.md). The search was targeted rather than an exhaustive meta-analysis; additional candidates require separate CAR-identity and timepoint harmonization.
+
+## Reproduce the longitudinal extension on Linux
+
+From `analyses/public_reanalysis`:
 
 ```bash
 mamba env create --file environment.yml
 mamba activate cart-public-reanalysis
-make fetch
-make analysis
-make verify
+make fetch-longitudinal
+make longitudinal
+make verify-longitudinal
 make test
 ```
 
-The complete Snakemake route is:
+The workflow invokes four cohort-specific raw adapters:
+
+- GSE197268: two checksum-pinned author annotation files and 18 checksum-pinned GEO 10x integer-count bundles for the nine patients passing the outcome-blind 25-cell rule; eligibility is author-QC `CAR == True` and author subtype `CD8 T`;
+- GSE235760: the checksum-pinned CELLxGENE H5AD, with integer UMI counts from `raw.X` and `Transduction == "CAR+"`;
+- GSE162975: the checksum-pinned dense UMI matrix and the committed 196-record GEO metadata crosswalk;
+- GSE273170: the checksum-pinned GEO archive, with a cell called CAR-positive when the custom `CAR` feature has at least one UMI.
+
+`make longitudinal` and the Snakemake workflow call all four adapters directly. The generic analysis layer validates raw integer counts, unique sample-cell identities, patient-stage aggregation, denominator rules, and one contribution per patient per contrast.
+
+`results/longitudinal_extension/frozen/` contains only derived patient-level or cohort-level tables, an analysis report, source/code manifests, and exact audit tables. Third-party cell-level matrices are downloaded to `data/raw/` and are not redistributed.
+
+`make verify-longitudinal` rejects a stale freeze: it checks the complete frozen-file inventory, current working-tree code, source-manifest and audit-table digests, content-addressed input provenance, and all nine declared canonical outputs byte for byte. Raw input keys contain SHA-256 digests rather than machine-specific paths, so an identical run from another Linux checkout or download cache produces the same analysis manifest.
+
+## Original GSE125881/GSE269379 component
+
+- **GSE125881:** 62,167 author-filtered CD8-positive CAR-T cells from four patients across infusion product, early, late, and very-late phases.
+- **GSE269379:** author-curated CSF metadata from five ICANS patients and four idiopathic-intracranial-hypertension comparators, plus one Visium HD section from a fatal ICANS case.
+
+For this component:
 
 ```bash
-snakemake --snakefile workflow/Snakefile --cores 1 --rerun-incomplete
+make fetch
+make analysis
+make verify
 ```
 
-`make fetch` downloads the exact public files recorded in `config/sources.tsv`, verifies byte sizes and SHA-256 digests, and extracts only the spatial archive members required by the analysis. Third-party matrices and images remain below `data/raw/` and are excluded from Git. The committed `results/frozen/` directory contains only derived aggregate tables, the manuscript figure, and a run manifest so that a local run can be compared with the reviewed result.
+The repository-only spatial panel is a direct overlay on the deposited GSE269379 H&E image. Orange points denote 960 CXCL16-positive 8-µm bins; teal triangles denote 14 CXCR6-positive bins. It is not a synthetic image, and no smoothing, imputation, segmentation, or deconvolution was used. See `docs/PANEL_F_PROVENANCE.md` for exact source files, checksums, crop coordinates, and interpretation limits.
 
-`config/gse125881_sample_crosswalk.tsv` records the exact patient-specific collection days and GEO accessions used to interpret the four author-defined longitudinal phases. Its sample-day provenance is the checksum-pinned GSE125881 family SOFT record listed in `config/sources.tsv`.
+## Interpretation limits
 
-## Statistical design
-
-For GSE269379, the reported between-group single-cell endpoints are calculated within donor. The independent unit is the donor, not an individual cell. Acute-ICANS and comparator donor summaries are compared with exact two-sided Mann–Whitney tests; Benjamini–Hochberg values are reported for the two defined endpoints. The within-donor CAR-positive versus CAR-negative summary is paired and exploratory. The single longitudinal ICANS donor is descriptive.
-
-For GSE125881, CXCR6-detected fractions and CXCR6 counts per million total UMIs are calculated for each patient and phase. With four selected patients, phase changes are reported as within-patient directions, medians, and observed ranges; no population-level efficacy claim is made.
-
-The GSE125881 marker sets are memory-associated (CCR7, IL7R, LEF1, LTB, MAL, SELL, TCF7), effector-associated (CCL5, GNLY, GZMB, IFNG, NKG7, PRF1), and dysfunction-associated (ENTPD1, HAVCR2, LAG3, PDCD1, TIGIT, TOX). Within each patient and phase, marker detection is the number of nonzero marker–cell pairs divided by the number of genes in the set multiplied by the number of cells. Figure 6B shows the median of this value across the four patients. This is a descriptive detection summary, not a module score or cell-state classification.
-
-For the single GSE269379 Visium HD section, the workflow reports transcript-positive 8-µm bins. A conditional depth-matched randomization checks whether CXCL16-positive bins occur within 24 µm of bins containing at least one of CD14, CD68, LST1, AIF1, TYROBP, or FCER1G. The Monte Carlo tail probability is conditional on bin-level exchangeability within library-size deciles; the null does not preserve spatial autocorrelation or tissue architecture. This is a within-section diagnostic, not patient-level inference, formal biological significance, or cell-type assignment. CXCR6 is displayed only as sparse transcript detection.
-
-## Outputs
-
-- `results/frozen/figure6_public_reanalysis.png`, `.pdf`, and `.svg`
-- donor- and patient-level aggregate tables in `results/frozen/tables/`
-- `results/frozen/analysis_manifest.json` with input digests and run parameters
-- `results/frozen/SHA256SUMS` for the committed outputs
+Transcript detection does not establish protein abundance or a chemokine gradient. These data cannot distinguish soluble from membrane-bound CXCL16 and do not directly test chemotaxis, retention, egress, efficacy, toxicity, or causality. Product-stratified estimates are descriptive; the available cohorts do not support a formal time-by-product interaction.
 
 ## Source studies
 
 - Sheih A, Voillet V, Hanafi LA, et al. *Nat Commun.* 2020;11:219. doi:10.1038/s41467-019-13880-1. GEO: GSE125881.
+- Haradhvala NJ, Leick MB, Maurer K, et al. *Nat Med.* 2022;28:1848-1859. doi:10.1038/s41591-022-01959-0. GEO: GSE197268.
+- Li Z, Zhao L, Zhang Y, et al. *Cell Rep.* 2023;42:113263. doi:10.1016/j.celrep.2023.113263. GEO: GSE162975.
+- Maurer K, Grabski IN, Houot R, et al. *Blood.* 2024;144:2490-2502. doi:10.1182/blood.2024024381. GEO: GSE273170.
+- Guerrero-Murillo M, Rill-Hinarejos A, Trincado JL, et al. *Cell Rep Med.* 2024;5:101803. doi:10.1016/j.xcrm.2024.101803. GEO: GSE235760.
 - Lu IN, Müller-Miny L, Krekeler C, et al. *Genome Med.* 2025;17:71. doi:10.1186/s13073-025-01498-6. GEO: GSE269379.
 
-The upstream files remain governed by their original repository terms. This repository does not redistribute the source matrices, cell-level metadata, or tissue images.
+Upstream files remain governed by their original repository terms. This repository does not redistribute public source matrices, cell-level metadata, or tissue images.

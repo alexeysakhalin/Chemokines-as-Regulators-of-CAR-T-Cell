@@ -50,7 +50,7 @@ where = ["src"]
 [tool.pytest.ini_options]
 addopts = "--strict-config --strict-markers -ra"
 minversion = "8.3"
-testpaths = ["tests"]
+testpaths = ["tests", "analyses/public_reanalysis/tests"]
 
 [tool.ruff]
 line-length = 100
