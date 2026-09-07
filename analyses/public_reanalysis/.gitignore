@@ -5,4 +5,5 @@ __pycache__/
 .snakemake/
 data/raw/
 results/local/
+results/longitudinal_extension/local/
 results/candidate*/

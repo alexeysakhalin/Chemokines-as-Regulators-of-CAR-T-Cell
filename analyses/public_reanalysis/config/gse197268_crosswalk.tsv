@@ -1,0 +1,5 @@
+source_label	canonical_stage	principal_use	note
+infusion product	IP	include	first treatment course; product-matched CAR-transcript-positive author-QC CD8 T cells
+D7-CART	D7-CART	include	physically enriched day-7 CAR-T fraction; product-matched CAR-transcript-positive author-QC CD8 T cells
+D7-PBMC	D7-PBMC	exclude_primary	unsorted aliquot; sensitivity analysis only
+retreatment	retreatment	exclude_primary	patient 29 repeat treatment is not part of first-course contrast

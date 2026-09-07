@@ -2,7 +2,7 @@ PYTHON ?= python
 SEED ?= 20260902
 PERMUTATIONS ?= 10000
 
-.PHONY: list fetch verify-inputs analysis verify test clean-results
+.PHONY: list fetch verify-inputs analysis verify fetch-longitudinal longitudinal verify-longitudinal test clean-results clean-longitudinal
 
 list:
 	$(PYTHON) scripts/fetch_public_inputs.py --list
@@ -28,8 +28,31 @@ analysis:
 verify:
 	$(PYTHON) scripts/verify_results.py --observed results/local --expected results/frozen
 
+fetch-longitudinal:
+	$(PYTHON) scripts/fetch_longitudinal_inputs.py
+
+longitudinal:
+	PYTHONHASHSEED=$(SEED) $(PYTHON) scripts/run_longitudinal_extension.py \
+		--gse197268-dir data/raw/GSE197268 \
+		--gse197268-obs data/raw/GSE197268/Fig1_CART_global_obs.csv \
+		--gse197268-subtype data/raw/GSE197268/Fig2_ALLT_CD_classifications.txt \
+		--gse162975-matrix data/raw/GSE162975/GSE162975_CART_BALL_UMI.csv.gz \
+		--gse235760-h5ad data/raw/GSE235760/2aad61a0-31b8-41f5-8b8a-dbd971269f7b.h5ad \
+		--gse273170-archive data/raw/GSE273170/GSE273170_RAW.tar \
+		--output-dir results/longitudinal_extension/local \
+		--seed $(SEED)
+
+verify-longitudinal:
+	$(PYTHON) scripts/verify_longitudinal_results.py \
+		--observed results/longitudinal_extension/local \
+		--expected results/longitudinal_extension/frozen
+
 test:
 	$(PYTHON) -m pytest -q
 
 clean-results:
 	$(PYTHON) scripts/clean_results.py --path results/local
+
+clean-longitudinal:
+	$(PYTHON) scripts/clean_longitudinal_results.py \
+		--path results/longitudinal_extension/local

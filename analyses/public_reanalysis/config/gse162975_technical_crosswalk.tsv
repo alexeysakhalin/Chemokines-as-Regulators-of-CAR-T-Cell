@@ -1,0 +1,197 @@
+gsm	technical_record	patient_id	deposited_stage	title_stage	response	cells_enriched_from	matrix_cell_count	title_stage_mismatch
+GSM4969386	T0-CR07-1	CR07	T0	T0	Cultured	Infusion products	44	0
+GSM4969387	T0-CR07-2	CR07	T0	T0	Cultured	Infusion products	50	0
+GSM4969388	T0-CR07-3	CR07	T0	T0	Cultured	Infusion products	51	0
+GSM4969389	T0-CR07-4	CR07	T0	T0	Cultured	Infusion products	51	0
+GSM4969390	T0-CR08-1	CR08	T0	T0	Cultured	Infusion products	48	0
+GSM4969391	T0-CR08-2	CR08	T0	T0	Cultured	Infusion products	48	0
+GSM4969392	T0-CR08-3	CR08	T0	T0	Cultured	Infusion products	48	0
+GSM4969393	T0-CR08-4	CR08	T0	T0	Cultured	Infusion products	48	0
+GSM4969394	T0-CR09-1	CR09	T0	T0	Cultured	Infusion products	47	0
+GSM4969395	T0-CR09-2	CR09	T0	T0	Cultured	Infusion products	36	0
+GSM4969396	T0-CR09-3	CR09	T0	T0	Cultured	Infusion products	36	0
+GSM4969397	T0-CR09-4	CR09	T0	T0	Cultured	Infusion products	40	0
+GSM4969398	T0-CR10-3	CR10	T0	T0	Cultured	Infusion products	48	0
+GSM4969399	T0-CR10-1	CR10	T0	T0	Cultured	Infusion products	1	0
+GSM4969400	T0-CR10-2	CR10	T0	T0	Cultured	Infusion products	6	0
+GSM4969401	T0-CR10-4	CR10	T0	T0	Cultured	Infusion products	5	0
+GSM4969402	T0-NR03-1	NR03	T0	T0	Cultured	Infusion products	47	0
+GSM4969403	T0-NR03-2	NR03	T0	T0	Cultured	Infusion products	48	0
+GSM4969404	T0-NR03-3	NR03	T0	T0	Cultured	Infusion products	48	0
+GSM4969405	T0-NR03-4	NR03	T0	T0	Cultured	Infusion products	48	0
+GSM4969406	T0-OT02-1	OT02	T0	T0	Cultured	Infusion products	2	0
+GSM4969407	T0-OT02-2	OT02	T0	T0	Cultured	Infusion products	3	0
+GSM4969408	T0-OT02-4	OT02	T0	T0	Cultured	Infusion products	2	0
+GSM4969409	T0-OT03-1	OT03	T0	T0	Cultured	Infusion products	44	0
+GSM4969410	T0-OT03-2	OT03	T0	T0	Cultured	Infusion products	47	0
+GSM4969411	T0-OT03-3	OT03	T0	T0	Cultured	Infusion products	47	0
+GSM4969412	T0-OT03-4	OT03	T0	T0	Cultured	Infusion products	48	0
+GSM4969413	T0-OT05-1	OT05	T0	T0	Cultured	Infusion products	47	0
+GSM4969414	T0-OT05-2	OT05	T0	T0	Cultured	Infusion products	47	0
+GSM4969415	T0-OT05-3	OT05	T0	T0	Cultured	Infusion products	48	0
+GSM4969416	T0-OT05-4	OT05	T0	T0	Cultured	Infusion products	48	0
+GSM4969417	T0-OT06-1	OT06	T0	T0	Cultured	Infusion products	48	0
+GSM4969418	T0-OT06-2	OT06	T0	T0	Cultured	Infusion products	48	0
+GSM4969419	T0-OT06-3	OT06	T0	T0	Cultured	Infusion products	47	0
+GSM4969420	T0-OT06-4	OT06	T0	T0	Cultured	Infusion products	48	0
+GSM4969421	T0-RE03-1	RE03	T0	T0	Cultured	Infusion products	44	0
+GSM4969422	T0-RE03-2	RE03	T0	T0	Cultured	Infusion products	43	0
+GSM4969423	T0-RE03-3	RE03	T0	T0	Cultured	Infusion products	42	0
+GSM4969424	T0-RE03-4	RE03	T0	T0	Cultured	Infusion products	43	0
+GSM4969425	T0-RE04-1	RE04	T0	T0	Cultured	Infusion products	48	0
+GSM4969426	T0-RE04-2	RE04	T0	T0	Cultured	Infusion products	43	0
+GSM4969427	T0-RE04-3	RE04	T0	T0	Cultured	Infusion products	36	0
+GSM4969428	T0-RE04-4	RE04	T0	T0	Cultured	Infusion products	35	0
+GSM4969429	T1-CR07-1	CR07	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969430	T1-CR07-2	CR07	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969431	T1-CR07-3	CR07	T1	T1	Complete Remission	Peripheral blood	47	0
+GSM4969432	T1-CR07-4	CR07	T1	T1	Complete Remission	Peripheral blood	39	0
+GSM4969433	T1-CR08-1	CR08	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969434	T1-CR08-2	CR08	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969435	T1-CR08-3	CR08	T1	T1	Complete Remission	Peripheral blood	47	0
+GSM4969436	T1-CR08-4	CR08	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969437	T1-CR09-1	CR09	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969438	T1-CR09-2	CR09	T1	T1	Complete Remission	Peripheral blood	47	0
+GSM4969439	T1-CR09-3	CR09	T1	T1	Complete Remission	Peripheral blood	45	0
+GSM4969440	T1-CR09-4	CR09	T1	T1	Complete Remission	Peripheral blood	42	0
+GSM4969441	T1-CR10-1	CR10	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969442	T1-CR10-2	CR10	T1	T1	Complete Remission	Peripheral blood	47	0
+GSM4969443	T1-CR10-3	CR10	T1	T1	Complete Remission	Peripheral blood	44	0
+GSM4969444	T1-CR10-4	CR10	T1	T1	Complete Remission	Peripheral blood	45	0
+GSM4969445	T1-CR11-2	CR11	T1	T1	Complete Remission	Peripheral blood	34	0
+GSM4969446	T1-CR11-3	CR11	T1	T1	Complete Remission	Peripheral blood	35	0
+GSM4969447	T1-CR11-4	CR11	T1	T1	Complete Remission	Peripheral blood	32	0
+GSM4969448	T1-NR01-1	NR01	T1	T1	No Remission	Peripheral blood	30	0
+GSM4969449	T1-NR01-34	NR01	T1	T1	No Remission	Peripheral blood	41	0
+GSM4969450	T1-NR02-1	NR02	T1	T1	No Remission	Peripheral blood	8	0
+GSM4969451	T1-NR02-2	NR02	T1	T1	No Remission	Peripheral blood	44	0
+GSM4969452	T1-NR02-3	NR02	T1	T1	No Remission	Peripheral blood	51	0
+GSM4969453	T1-NR02-4	NR02	T1	T1	No Remission	Peripheral blood	65	0
+GSM4969454	T1-NR03-3	NR03	T1	T1	No Remission	Peripheral blood	67	0
+GSM4969455	T1-NR03-1	NR03	T1	T1	No Remission	Peripheral blood	88	0
+GSM4969456	T1-NR03-2	NR03	T1	T1	No Remission	Peripheral blood	86	0
+GSM4969457	T1-OT02-3	OT02	T1	T1	Complete Remission	Peripheral blood	47	0
+GSM4969458	T1-OT02-2	OT02	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969459	T1-OT02-4	OT02	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969460	T1-OT02-1	OT02	T1	T1	Complete Remission	Peripheral blood	46	0
+GSM4969461	T1-OT03-1	OT03	T1	T1	Complete Remission	Peripheral blood	45	0
+GSM4969462	T1-OT03-2	OT03	T1	T1	Complete Remission	Peripheral blood	53	0
+GSM4969463	T1-OT03-4	OT03	T1	T1	Complete Remission	Peripheral blood	56	0
+GSM4969464	T1-OT05-1	OT05	T1	T1	Infection	Peripheral blood	38	0
+GSM4969465	T1-OT06-1	OT06	T1	T1	Infection	Peripheral blood	41	0
+GSM4969466	T1-OT06-2	OT06	T1	T1	Infection	Peripheral blood	41	0
+GSM4969467	T1-RE03-1	RE03	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969468	T1-RE03-2	RE03	T1	T1	Complete Remission	Peripheral blood	45	0
+GSM4969469	T1-RE03-3	RE03	T1	T1	Complete Remission	Peripheral blood	48	0
+GSM4969470	T1-RE03-4	RE03	T1	T1	Complete Remission	Peripheral blood	46	0
+GSM4969471	T1-RE04-2	RE04	T1	T1	Complete Remission	Peripheral blood	47	0
+GSM4969472	T1-RE04-1	RE04	T1	T1	Complete Remission	Peripheral blood	46	0
+GSM4969473	T1-RE04-3	RE04	T1	T1	Complete Remission	Peripheral blood	22	0
+GSM4969474	T1-RE04-4	RE04	T1	T1	Complete Remission	Peripheral blood	25	0
+GSM4969475	T12-CR03-1	CR03	T15	T12	Complete Remission	Peripheral blood	16	1
+GSM4969476	T12-CR04-2	CR04	T12	T12	Complete Remission	Peripheral blood	84	0
+GSM4969477	T12-CR04-3	CR04	T12	T12	Complete Remission	Peripheral blood	82	0
+GSM4969478	T12-CR04-4	CR04	T12	T12	Complete Remission	Peripheral blood	89	0
+GSM4969479	T12-CR05-1	CR05	T12	T12	Complete Remission	Peripheral blood	72	0
+GSM4969480	T12-CR05-2	CR05	T12	T12	Complete Remission	Peripheral blood	45	0
+GSM4969481	T12-CR05-3	CR05	T12	T12	Complete Remission	Peripheral blood	44	0
+GSM4969482	T12-CR07-2	CR07	T12	T12	Complete Remission	Peripheral blood	34	0
+GSM4969483	T12-CR07-3	CR07	T12	T12	Complete Remission	Peripheral blood	29	0
+GSM4969484	T12-CR07-4	CR07	T12	T12	Complete Remission	Peripheral blood	29	0
+GSM4969485	T12-OT01-1	OT01	T15	T12	Extramedullary relapse	Peripheral blood	34	1
+GSM4969486	T12-OT01-2	OT01	T15	T12	Extramedullary relapse	Peripheral blood	30	1
+GSM4969487	T12-OT01-3	OT01	T15	T12	Extramedullary relapse	Peripheral blood	29	1
+GSM4969488	T12-RE01-1	RE01	T15	T12	Relapse	Peripheral blood	17	1
+GSM4969489	T12-RE01-2	RE01	T15	T12	Relapse	Peripheral blood	14	1
+GSM4969490	T12-RE01-3	RE01	T15	T12	Relapse	Peripheral blood	32	1
+GSM4969491	T12-RE01-4	RE01	T15	T12	Relapse	Peripheral blood	22	1
+GSM4969492	T12-RE01-5	RE01	T15	T12	Relapse	Peripheral blood	24	1
+GSM4969493	T12-RE01-6	RE01	T15	T12	Relapse	Peripheral blood	22	1
+GSM4969494	T12-RE01-7	RE01	T15	T12	Relapse	Peripheral blood	21	1
+GSM4969495	T12-RE02-123	RE02	T12	T12	Relapse	Peripheral blood	9	0
+GSM4969496	T14-CR08-1	CR08	T12	T14	Complete Remission	Peripheral blood	55	1
+GSM4969497	T14-CR08-2	CR08	T12	T14	Complete Remission	Peripheral blood	63	1
+GSM4969498	T14-CR08-5	CR08	T12	T14	Complete Remission	Peripheral blood	44	1
+GSM4969499	T16-CR01-1	CR01	T15	T16	Complete Remission	Peripheral blood	80	1
+GSM4969500	T16-CR01-2	CR01	T15	T16	Complete Remission	Peripheral blood	69	1
+GSM4969501	T16-CR01-4	CR01	T15	T16	Complete Remission	Peripheral blood	59	1
+GSM4969502	T3-CR06-3	CR06	T4.5	T3	Complete Remission	Peripheral blood	38	1
+GSM4969503	T3-CR06-4	CR06	T4.5	T3	Complete Remission	Peripheral blood	35	1
+GSM4969504	T3-CR08-1	CR08	T4.5	T3	Complete Remission	Peripheral blood	23	1
+GSM4969505	T3-CR08-3	CR08	T4.5	T3	Complete Remission	Peripheral blood	13	1
+GSM4969506	T3-CR08-2	CR08	T4.5	T3	Complete Remission	Peripheral blood	11	1
+GSM4969507	T3-CR09-1	CR09	T3	T3	Complete Remission	Peripheral blood	10	0
+GSM4969508	T3-CR09-3	CR09	T3	T3	Complete Remission	Peripheral blood	25	0
+GSM4969509	T3-CR09-4	CR09	T3	T3	Complete Remission	Peripheral blood	18	0
+GSM4969510	T3-CR10-2	CR10	T4.5	T3	Complete Remission	Peripheral blood	14	1
+GSM4969511	T3-CR10-3	CR10	T4.5	T3	Complete Remission	Peripheral blood	15	1
+GSM4969512	T3-CR11-2	CR11	T3	T3	Complete Remission	Peripheral blood	27	0
+GSM4969513	T3-CR11-3	CR11	T3	T3	Complete Remission	Peripheral blood	19	0
+GSM4969514	T3-CR11-4	CR11	T3	T3	Complete Remission	Peripheral blood	65	0
+GSM4969515	T3-CR12-1	CR12	T4.5	T3	Complete Remission	Peripheral blood	67	1
+GSM4969516	T3-CR12-2	CR12	T4.5	T3	Complete Remission	Peripheral blood	53	1
+GSM4969517	T3-CR12-3	CR12	T4.5	T3	Complete Remission	Peripheral blood	60	1
+GSM4969518	T3-OT02-12	OT02	T3	T3	Complete Remission	Peripheral blood	62	0
+GSM4969519	T3-OT02-34	OT02	T3	T3	Complete Remission	Peripheral blood	27	0
+GSM4969520	T3-OT03-1	OT03	T4.5	T3	Complete Remission	Peripheral blood	34	1
+GSM4969521	T3-OT03-2	OT03	T4.5	T3	Complete Remission	Peripheral blood	28	1
+GSM4969522	T3-OT03-4	OT03	T4.5	T3	Complete Remission	Peripheral blood	15	1
+GSM4969523	T3-OT03-3	OT03	T4.5	T3	Complete Remission	Peripheral blood	18	1
+GSM4969524	T3-RE02-1	RE02	T3	T3	Complete Remission	Peripheral blood	29	0
+GSM4969525	T3-RE02-2	RE02	T3	T3	Complete Remission	Peripheral blood	35	0
+GSM4969526	T3-RE02-3	RE02	T3	T3	Complete Remission	Peripheral blood	37	0
+GSM4969527	T3-RE02-4	RE02	T3	T3	Complete Remission	Peripheral blood	40	0
+GSM4969528	T3-RE03-1	RE03	T3	T3	Complete Remission	Peripheral blood	14	0
+GSM4969529	T3-RE03-2	RE03	T3	T3	Complete Remission	Peripheral blood	16	0
+GSM4969530	T3-RE03-4	RE03	T3	T3	Complete Remission	Peripheral blood	30	0
+GSM4969531	T3-RE05-1	RE05	T3	T3	Relapse	Peripheral blood	57	0
+GSM4969532	T3-RE05-2	RE05	T3	T3	Relapse	Peripheral blood	21	0
+GSM4969533	T6-CR05-1	CR05	T6	T6	Complete Remission	Peripheral blood	47	0
+GSM4969534	T6-CR05-2	CR05	T6	T6	Complete Remission	Peripheral blood	44	0
+GSM4969535	T6-CR05-3	CR05	T6	T6	Complete Remission	Peripheral blood	48	0
+GSM4969536	T6-CR05-4	CR05	T6	T6	Complete Remission	Peripheral blood	41	0
+GSM4969537	T6-CR08-1	CR08	T6	T6	Complete Remission	Peripheral blood	33	0
+GSM4969538	T6-CR10-22	CR10	T6	T6	Complete Remission	Peripheral blood	14	0
+GSM4969539	T6-CR10-1	CR10	T6	T6	Complete Remission	Peripheral blood	31	0
+GSM4969540	T6-CR10-2	CR10	T6	T6	Complete Remission	Peripheral blood	31	0
+GSM4969541	T6-CR11-4	CR11	T6	T6	Complete Remission	Peripheral blood	39	0
+GSM4969542	T6-CR11-3	CR11	T6	T6	Complete Remission	Peripheral blood	40	0
+GSM4969543	T6-CR11-5	CR11	T6	T6	Complete Remission	Peripheral blood	54	0
+GSM4969544	T6-OT02-4	OT02	T4.5	T6	Complete Remission	Peripheral blood	50	1
+GSM4969545	T6-OT02-3	OT02	T4.5	T6	Complete Remission	Peripheral blood	2	1
+GSM4969546	T6-OT02-2	OT02	T4.5	T6	Complete Remission	Peripheral blood	20	1
+GSM4969547	T6-OT03-2	OT03	T6	T6	Complete Remission	Peripheral blood	55	0
+GSM4969548	T6-OT03-3	OT03	T6	T6	Complete Remission	Peripheral blood	21	0
+GSM4969549	T6-OT03-4	OT03	T6	T6	Complete Remission	Peripheral blood	47	0
+GSM4969550	T6-OT04-1	OT04	T6	T6	Complete Remission	Peripheral blood	46	0
+GSM4969551	T6-OT04-2	OT04	T6	T6	Complete Remission	Peripheral blood	45	0
+GSM4969552	T6-OT04-3	OT04	T6	T6	Complete Remission	Peripheral blood	26	0
+GSM4969553	T6-OT04-4	OT04	T6	T6	Complete Remission	Peripheral blood	30	0
+GSM4969554	T6-RE02-1	RE02	T6	T6	Complete Remission	Peripheral blood	38	0
+GSM4969555	T6-RE02-2	RE02	T6	T6	Complete Remission	Peripheral blood	35	0
+GSM4969556	T6-RE02-3	RE02	T6	T6	Complete Remission	Peripheral blood	12	0
+GSM4969557	T6-RE02-4	RE02	T6	T6	Complete Remission	Peripheral blood	25	0
+GSM4969558	T6-RE02-5	RE02	T6	T6	Complete Remission	Peripheral blood	28	0
+GSM4969559	T6-RE02-6	RE02	T6	T6	Complete Remission	Peripheral blood	15	0
+GSM4969560	T9-CR02-1	CR02	T9	T9	Complete Remission	Peripheral blood	48	0
+GSM4969561	T9-CR02-2	CR02	T9	T9	Complete Remission	Peripheral blood	48	0
+GSM4969562	T9-CR02-3	CR02	T9	T9	Complete Remission	Peripheral blood	48	0
+GSM4969563	T9-CR02-4	CR02	T9	T9	Complete Remission	Peripheral blood	47	0
+GSM4969564	T9-CR06-1	CR06	T12	T9	Complete Remission	Peripheral blood	53	1
+GSM4969565	T9-CR06-4	CR06	T12	T9	Complete Remission	Peripheral blood	39	1
+GSM4969566	T9-CR07-3	CR07	T9	T9	Complete Remission	Peripheral blood	8	0
+GSM4969567	T9-CR07-4	CR07	T9	T9	Complete Remission	Peripheral blood	4	0
+GSM4969568	T9-CR08-1	CR08	T9	T9	Complete Remission	Peripheral blood	22	0
+GSM4969569	T9-CR08-2	CR08	T9	T9	Complete Remission	Peripheral blood	30	0
+GSM4969570	T9-CR08-35	CR08	T9	T9	Complete Remission	Peripheral blood	17	0
+GSM4969571	T9-CR08-4	CR08	T9	T9	Complete Remission	Peripheral blood	22	0
+GSM4969572	T9-CR10-3	CR10	T9	T9	Complete Remission	Peripheral blood	29	0
+GSM4969573	T9-CR10-4	CR10	T9	T9	Complete Remission	Peripheral blood	31	0
+GSM4969574	T9-CR10-6	CR10	T9	T9	Complete Remission	Peripheral blood	42	0
+GSM4969575	T9-CR10-2	CR10	T9	T9	Complete Remission	Peripheral blood	42	0
+GSM4969576	T9-CR10-7	CR10	T9	T9	Complete Remission	Peripheral blood	18	0
+GSM4969577	T9-RE02-1	RE02	T9	T9	Complete Remission	Peripheral blood	35	0
+GSM4969578	T9-RE02-4	RE02	T9	T9	Complete Remission	Peripheral blood	48	0
+GSM4969579	T9-RE03-1	RE03	T9	T9	Relapse	Peripheral blood	22	0
+GSM4969580	T9-RE03-3	RE03	T9	T9	Relapse	Peripheral blood	39	0
+GSM4969581	T9-RE03-4	RE03	T9	T9	Relapse	Peripheral blood	49	0

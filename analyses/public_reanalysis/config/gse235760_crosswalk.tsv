@@ -1,0 +1,11 @@
+field	value	analysis_use
+collection_id	14dc301f-d4fb-4743-a590-aa88d5f1df1a	CELLxGENE collection identity
+dataset_id	460dfe21-0550-4521-92fe-db0f3036d8b0	CELLxGENE dataset identity
+dataset_version	2aad61a0-31b8-41f5-8b8a-dbd971269f7b	immutable download identity
+patient	obs/donor_id	patient-level independent unit
+stage	obs/Timepoint	IP and patient-specific expansion Peak
+sample	obs/Sample_id	biological sample identifier
+car_status	obs/Transduction	retain CAR+
+counts	raw/X	integer UMI counts
+gene_symbol	raw/var/feature_name	CXCR6 and locked marker symbols
+product	varni-cel	cohort product

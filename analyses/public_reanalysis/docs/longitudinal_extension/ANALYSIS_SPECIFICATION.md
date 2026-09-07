@@ -1,93 +1,98 @@
 # Analysis specification: longitudinal public-cohort extension
 
-Version: 0.1 (2026-09-02)
+Version 0.2, finalized 2026-09-07
 
 ## Status and scope
 
-This document fixes the analysis rules for the longitudinal extension before the repository workflow is implemented and frozen. It was prepared after public-data access and feasibility checks, some of which included provisional target-gene counts; it is therefore an analysis specification, not a prospective preregistration. Any later data-dependent change must be recorded in `DECISIONS.md` and labelled exploratory.
+This is an exploratory secondary analysis of public data, not a prospective preregistration or a confirmatory clinical study. The rules below were fixed after data-access and feasibility checks. Any data-dependent departure must be entered in `DECISIONS.md`, propagated to the run manifest, and labelled exploratory.
 
-The extension tests whether CXCR6 transcription in CAR-T cells changes over time in independent public cohorts. It does not enlarge the GSE269379 ICANS-CSF donor comparison or its single-case spatial analysis, and it cannot test a CXCL16 protein gradient, chemotaxis, retention, egress, or causality.
+The primary question is whether the fraction of CAR-T cells with detectable CXCR6 transcript changes within patients between the manufactured product and an early post-infusion sample. The patient is the independent biological unit. The extension does not test a CXCL16 protein gradient, chemotaxis, retention, egress, treatment efficacy, neurotoxicity, or causality.
+
+This is a documented, targeted public-data reanalysis rather than an exhaustive meta-analysis. A cohort enters the finalized workflow only after its public cell identity, CAR definition, biological time points, and patient pairing have been audited and harmonized. Additional public cohorts may merit separate future audit; their existence is not treated as negative evidence.
 
 ## Cohort roles
 
-- **GSE125881** is the four-patient discovery time course already present in Figure 6.
-- **GSE197268** is the principal independent validation cohort for the infusion-product-to-day-7 contrast.
-- **GSE162975** is an independent plate-based STRT-seq replication cohort and provides longer follow-up. It is analysed separately because its disease, CAR19/CAR22 cocktail, enrichment procedure, and platform differ from the 10x cohorts.
-- **GSE273170** is an independent axi-cel sensitivity cohort for day 7 to day 14. Public matrices precede part of the authors' downstream QC and CAR-transcript-positive denominators are sparse, so this cohort is not promoted to a primary validation cohort.
-- **GSE269379** remains an orthogonal ICANS-CSF and spatial dataset.
+- **GSE125881** is the four-patient discovery time course in the original repository module. It remains descriptive and is not included in the three-test early family.
+- **GSE197268** is an independent early comparison of infusion-product and physically enriched day-7 CAR-T cells in large B-cell lymphoma.
+- **GSE235760** is an independent paired early comparison of manufactured varni-cel and the patient-specific peripheral-blood expansion peak in five adults with B-ALL.
+- **GSE162975** is an independent plate-based STRT-seq replication cohort and provides later follow-up. It is kept separate because disease, CAR19/CAR22 cocktail, enrichment, and platform differ from the 10x cohorts.
+- **GSE273170** is a supportive axi-cel day-7-to-day-14 sensitivity cohort. Deposited matrices precede part of the authors' downstream quality control, and CAR-transcript-positive denominators are sparse.
+- **GSE269379** remains an orthogonal ICANS-CSF and single-section spatial dataset and is never pooled with blood time courses.
 
 ## Independent unit and sample construction
 
-The patient is the independent biological unit. Cells, barcodes, technical libraries, plates, and repeated aliquots are never treated as independent replicates.
-
-For each cohort, technical records belonging to the same patient and biological time point are collapsed before analysis. Each patient contributes at most once to a specified contrast. Matrices are not concatenated across studies, and no cross-study batch correction is used for inference.
+Cells, barcodes, plates, technical libraries, and repeated aliquots are not biological replicates. Technical records from the same patient and biological time point are collapsed before contrasts. Each patient contributes at most one paired value to a defined contrast. Studies are not concatenated, batch-corrected together, or combined into a pooled P value.
 
 ### GSE197268
 
-The first treatment course is used. The eligible sampling frame is the 21 patients with both an infusion-product matrix and a physically enriched D7-CART matrix. Matrices are joined to the authors' public cell metadata and CD4/CD8 classifications by the globalized 10x barcode. The principal cell stratum is author-QC-passing, product-matched CAR-transcript-positive, CD8-positive T cells at both time points. Patient 29 retreatment records, unsorted day-7 aliquots, and D7-CART aliquots from patients without an infusion product are excluded from the principal contrast and may be reported only as sensitivity analyses.
+The first treatment course is used. The sampling frame contains 21 patients with author-QC metadata for both an infusion product and a physically enriched D7-CART sample. Before inspecting CXCR6 counts, the two author annotation files are joined by globalized 10x barcode and the denominator is restricted to product-matched cells with `CAR == True` and author subtype `CD8 T`. Nine patients have at least 25 such cells at both stages; the other 12 fail this outcome-blind denominator rule. Only the corresponding 18 GEO processed matrices are downloaded for the primary raw-count reconstruction. The committed screening table reports all 21 patients and the exclusion reason. Patient 29 retreatment records, unsorted day-7 aliquots, and D7-CART aliquots without a matching product are excluded from the principal contrast.
+
+### GSE235760
+
+The checksum-pinned CELLxGENE H5AD contains 37,100 author-QC T cells and integer UMI counts in `raw.X`. `obs/donor_id` defines patient, `obs/Timepoint` defines `IP` and patient-specific `Peak`, `obs/Sample_id` identifies the biological sample, and `obs/Transduction == "CAR+"` defines the eligible stratum. CXCR6 is the unique `raw.var/feature_name == "CXCR6"` feature (ENSG00000172215). The final eligible set contains 18,978 CAR-positive cells: 10,516 at IP and 8,462 at Peak.
 
 ### GSE162975
 
-The deposited gene-by-cell UMI matrix contains sequence-validated CD3-positive/CAR-positive cells. GEO sequencing records are collapsed to patient by canonical biological stage using the deposited `sampling stage` field; stage must not be inferred from the sample-title prefix because several titles disagree with the deposited stage. The principal stratum is all validated CAR-T cells because the public matrix does not provide a complete per-cell CD4/CD8 or CAR19/CAR22 assignment.
+The deposited gene-by-cell UMI matrix contains sequence-validated CD3-positive/CAR-positive cells. GEO sequencing records are collapsed by patient and deposited `sampling stage`; a stage is not inferred from title prefix because several titles disagree with the deposited stage. All validated CAR-T cells are used because complete per-cell CD4/CD8 and CAR19/CAR22 assignments are unavailable.
 
 ### GSE273170
 
-Cells are called CAR-transcript-positive when the custom `CAR` feature has at least one UMI, matching the source study. The principal sensitivity contrast is paired day 7 versus day 14. Results are reported both without an additional denominator filter and with at least 10 CAR-transcript-positive cells at each time point. Baseline CAR signal is treated as background evidence, not as genuine pre-infusion CAR-T cells.
+The checksum-pinned GEO archive contains gzip-compressed, dense R-style gene-by-cell RNA tables: quoted identifiers are separated by whitespace, the header contains the cell barcodes, and each data row begins with a quoted gene symbol. The parser accepts this deposited layout directly and verifies the SHA-256 digest of every selected member against `config/gse273170_crosswalk.tsv`. Cells are CAR-transcript positive when the custom `CAR` feature has at least one UMI, matching the source study. Day 7 and day 14 are paired within patient. Results are reported for all recoverable pairs and for the locked minimum of 10 CAR-transcript-positive cells at both stages. Baseline CAR signal is not interpreted as genuine pre-infusion CAR-T biology.
+
+### GSE290722 exclusion
+
+GSE290722 was excluded from the declared longitudinal CAR-T endpoint because the public repeated-timepoint metadata do not identify CAR-T cells: the only public author-called CAR-positive barcode list covers 128 week-4 cells from 13 patients, leaving no infusion-product-to-post-infusion patient pairs under the locked CAR-T definition. The cohort may be useful for a separate native-immune or week-4 descriptive analysis, but it cannot increase the eligible n for the current endpoint.
 
 ## Endpoints
 
-For every patient and time point, the workflow records:
+For each patient and stage, the workflow records the number of eligible cells, the number and fraction with at least one CXCR6 UMI, total CXCR6 UMI, total raw UMI where recoverable, and CXCR6 counts per million total UMI. The inferential endpoint is the within-patient change in CXCR6-detected cell fraction; CPM is retained as a descriptive normalization only.
 
-1. number of eligible cells;
-2. number and fraction with at least one CXCR6 UMI;
-3. total CXCR6 UMI;
-4. total UMI in the eligible-cell pseudobulk;
-5. CXCR6 counts per million total UMI;
-6. detection summaries for the locked memory-, effector-, and dysfunction-associated marker sets already used in the original module.
+Memory-, effector-, and dysfunction-associated marker sets are locked as follows:
 
-The principal interpretable endpoint is the within-patient change in the CXCR6-detected cell fraction. Pseudobulk CXCR6 counts per million are a sensitivity endpoint. No missing time point is imputed, and a sample with no recoverable CAR-T cells is missing for within-CAR-T expression rather than assigned zero expression.
+- memory: CCR7, IL7R, LEF1, LTB, MAL, SELL, TCF7;
+- effector: CCL5, GNLY, GZMB, IFNG, NKG7, PRF1;
+- dysfunction: ENTPD1, HAVCR2, LAG3, PDCD1, TIGIT, TOX.
+
+Marker-set detection is the number of nonzero gene-cell pairs divided by the number of possible gene-cell pairs. It is a descriptive summary, not a cell-state label or a module score. Any paired marker-set sign test is restricted to the same included patients, eligible cells, minimum-cell rule, and preselected stages as the corresponding CXCR6 contrast. No missing stage is imputed, and a stage with zero recoverable eligible CAR-T cells is missing rather than assigned zero CXCR6 expression. For GSE162975, the deposited-to-analysis stage mapping and the priority used to select the first available T3/T4.5 or T6-or-later sample are defined in `config/gse162975_crosswalk.tsv`; the same selected source stage is aliased in both the CXCR6 and marker aggregate tables.
 
 ## Locked contrasts
 
-- GSE197268: infusion product to D7-CART (principal early validation).
-- GSE162975: T0 infusion product to T1 peak within the first month (independent early replication).
-- GSE162975: T1 to the first available T3 or T4.5 sample (exploratory post-peak change).
-- GSE162975: T1 to the first available T6-or-later sample (exploratory extended follow-up).
-- GSE273170: day 7 to day 14 (sensitivity replication).
+- GSE197268: infusion product to D7-CART, minimum 25 eligible cells at both stages;
+- GSE235760: infusion product to patient-specific expansion peak, minimum 25 eligible cells at both stages;
+- GSE162975: T0 infusion product to T1 first-month peak, minimum 25 eligible cells at both stages;
+- GSE162975: T1 to first available T3/T4.5, exploratory post-peak comparison;
+- GSE162975: T1 to first available T6-or-later stage, exploratory extended follow-up;
+- GSE273170: day 7 to day 14, minimum 10 CAR-transcript-positive cells at both stages.
 
 The advertised study cohort size is never substituted for the number of complete eligible patient pairs.
 
 ## Statistical summaries
 
-Each cohort and contrast is analysed separately. The workflow reports the paired patient values, median paired change, interquartile range, number increasing/decreasing/unchanged, and a two-sided exact binomial sign-test P value after removing exact zero differences. A paired Wilcoxon result is reported only when its assumptions and exact handling of ties/zeros are explicit. Confidence intervals are patient-level bootstrap intervals with a fixed seed and are labelled descriptive when the number of pairs is small.
+Each cohort and contrast is analyzed separately. The workflow reports paired patient values, the median and interquartile range of paired changes, counts increasing/decreasing/unchanged, and a two-sided exact binomial sign-test P value after discarding exact zero changes. There are no cell-level P values.
 
-The GSE197268 and GSE162975 early contrasts form one two-test family; Holm-adjusted values are reported. Later contrasts and GSE273170 are supportive or exploratory and cannot rescue a failed early validation. Marker-set comparisons are adjusted by Benjamini-Hochberg within the prespecified marker family.
+The GSE197268, GSE235760, and GSE162975 early comparisons form the three-test early family in the finalized exploratory workflow; Holm-adjusted values are reported. Later GSE162975 contrasts and GSE273170 are supportive or exploratory. Marker-set tests are Benjamini-Hochberg adjusted within cohort and contrast.
 
-For GSE197268, product-stratified patient estimates for axi-cel and tisa-cel are always shown because product-specific CAR detection and biology differ. Response-stratified estimates are exploratory; the cohort is too small for a high-dimensional adjusted outcome model.
+GSE197268 product-stratified axi-cel and tisa-cel estimates are descriptive. The available patients do not support a formal time-by-product interaction or a high-dimensional adjusted outcome model.
 
 ## Sensitivity analyses
 
-- minimum eligible-cell thresholds of 25 and 100 for GSE197268;
-- GSE197268 all CAR-positive T cells versus the locked CD8-positive stratum;
-- GSE197268 physical D7-CART fraction versus product-matched transcript-positive cells;
-- exclusion of any very small GSE162975 biological specimen, reported by an explicit threshold rather than by CXCR6 value;
+- product-stratified descriptive estimates for axi-cel and tisa-cel;
+- thresholds of 25, 100, 500, and 1,000 cells for GSE235760;
+- removal of explicitly small GSE162975 specimens by denominator rather than by CXCR6 value;
 - GSE273170 minimum CAR-positive denominators of 1 and 10;
-- patient-level detection fraction versus pseudobulk counts per million;
-- leave-one-patient-out median effects for cohorts with at least five eligible pairs.
+- leave-one-patient-out median effects for contrasts with at least five pairs.
 
 ## Cross-cohort interpretation
 
-The primary synthesis is a cohort-level table, not a pooled cell analysis or a pooled P value. A common temporal programme is described only when cohort-specific directions are concordant. Discordance is reported as heterogeneity rather than hidden through pooling.
-
-Even concordant transcript-level changes support only a temporal association. They do not establish enhanced tumour or CNS trafficking, a CXCL16 gradient, membrane-versus-soluble CXCL16 biology, treatment efficacy, neurotoxicity, or a causal role for CXCR6.
+The synthesis is a cohort-level table, not a pooled cell analysis. A common temporal program is described only if independent cohort directions are concordant. Discordance is reported as heterogeneity. Even concordant transcript changes would support temporal association only and would not establish tumor or CNS trafficking, a functional gradient, soluble-versus-membrane CXCL16 biology, or causality.
 
 ## Required reproducibility outputs
 
 - checksum-pinned source manifests and sample crosswalks;
-- per-patient/time-point QC and aggregate tables;
-- one explicit inclusion table per contrast;
-- cohort-specific paired results and sensitivity results;
-- a deterministic Markdown report suitable for manuscript drafting;
-- a machine-readable run manifest and SHA-256 manifest of frozen outputs;
-- tests preventing duplicate patients, duplicate biological samples, and cell-level pseudoreplication.
+- patient/stage aggregates and contrast-inclusion tables;
+- cohort-specific paired summaries and sensitivity results;
+- a deterministic Markdown report;
+- a machine-readable run manifest and internal SHA-256 manifest;
+- tests preventing duplicate patients, duplicate cells, and cell-level pseudoreplication.
 
+The run manifest uses repository-relative paths for version-controlled code and configuration, and content-addressed keys for downloaded matrices. Verification compares the observed provenance with the frozen provenance, confirms that frozen code/source/audit digests still match the working tree, and checks every declared canonical output byte for byte.

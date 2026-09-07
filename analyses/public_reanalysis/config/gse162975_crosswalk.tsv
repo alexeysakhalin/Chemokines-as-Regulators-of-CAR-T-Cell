@@ -1,0 +1,10 @@
+deposited_sampling_stage	canonical_stage	selection_priority	analysis_use
+T0	T0		infusion-product baseline
+T1	T1		first-month expansion peak
+T3	T3-or-T4.5	1	first available post-peak stage
+T4.5	T3-or-T4.5	2	first available post-peak stage if T3 unavailable
+T6	T6-plus	1	first available extended-follow-up stage
+T9	T6-plus	2	first available extended-follow-up stage if T6 unavailable
+T12	T6-plus	3	first available extended-follow-up stage if earlier stages unavailable
+T15	T6-plus	4	first available extended-follow-up stage if earlier stages unavailable
+T16	T6-plus	5	first available extended-follow-up stage if earlier stages unavailable
