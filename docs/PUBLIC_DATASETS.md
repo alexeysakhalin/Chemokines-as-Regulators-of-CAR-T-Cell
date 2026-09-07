@@ -2,7 +2,7 @@
 
 ## Scope and evidence boundary
 
-This inventory identifies public data that may support parts of the prospective analysis plan. It was initially assembled from repository records and linked publications checked on 2026-09-01. Three GSE125881 repository files were subsequently retrieved locally and checksum-verified as documented below and in `config/public_datasets.tsv`. No biological analysis was performed and this document reports no new biological result.
+This inventory identifies public data that may support parts of the prospective analysis plan. It was initially assembled from repository records and linked publications checked on 2026-09-01. The completed public-data reanalysis, including cohort-specific eligibility and results, is documented separately in [`analyses/public_reanalysis/README.md`](../analyses/public_reanalysis/README.md). This inventory retains the wider feasibility assessment; accessions listed here are not all included in the scientific analysis.
 
 The five requested analyses are abbreviated as follows:
 
@@ -173,7 +173,7 @@ Third-party biological data are inputs, not repository source code.
 - Do not invent a checksum for a file that has not been retrieved. A public-dataset manifest row becomes complete only after local retrieval has produced the size and SHA-256 value. Repository checksums supplied by the source should be stored in a separate field and labeled with their algorithm.
 - Public availability does not automatically grant redistribution rights. Record and follow GEO/SRA, publication, and study-specific terms before sharing any source or derivative file.
 - Small, non-sensitive aggregate or figure-source tables may be versioned only after an explicit license, consent, data-use-agreement, and privacy review confirms that redistribution is permitted. Otherwise, deposit permitted outputs in an appropriate restricted or DOI-bearing archive and version only their accession and provenance. A publication release should ideally archive the code and permitted source-data tables with a versioned Zenodo DOI or an equivalent long-term repository record.
-- Controlled data, including dbGaP, EGA, GSA-Human, Science Data Bank controlled records, and any derivative covered by a data-use agreement, must never be uploaded to GitHub, a public release, CI, an external artifact store, or a shared container image. Store only the accession, access-status metadata, approved local path placeholder, and compliant analysis scripts. Do not commit credentials, approval documents, participant metadata, or access tokens.
+- Controlled data, including dbGaP, EGA, GSA-Human, Science Data Bank controlled records, and any derivative covered by a data-use agreement, must never be uploaded to GitHub, a public release, CI, an external artifact store, or a shared container image. Store only the accession, access-status metadata, approved local path, and compliant analysis scripts. Do not commit credentials, approval documents, participant metadata, or access tokens.
 - A reproducible public release should fail clearly when an external input is absent and print the accession and expected checksum. It must not silently substitute synthetic data. The deterministic demonstration dataset remains explicitly labeled `synthetic` and is never cited or used as scientific evidence.
 
 ## Minimum pre-analysis audit

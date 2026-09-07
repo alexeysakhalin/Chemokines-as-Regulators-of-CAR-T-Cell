@@ -48,7 +48,7 @@ All other endpoints are secondary or exploratory. Changing the primary endpoint 
 
 ### Input and preprocessing
 
-The complete study requires raw FASTQ files or repository-generated unfiltered count matrices, feature-barcode matrices for antibody-derived tags, sample-level metadata, and—when available—paired V(D)J data and a validated CAR-transgene capture feature. The current draft begins from a validated annotated long table; it does not yet perform FASTQ alignment, ambient RNA correction, cell calling, doublet detection, CITE-seq normalization, or V(D)J assembly. Until those stages are implemented, their external commands, thresholds, software versions, reference bundles, and output checksums must be supplied as upstream provenance. Samples are not excluded solely because their biology differs from the cohort.
+The complete study requires raw FASTQ files or repository-generated unfiltered count matrices, feature-barcode matrices for antibody-derived tags, sample-level metadata, and—when available—paired V(D)J data and a validated CAR-transgene capture feature. The root package begins from a validated annotated long table and does not perform FASTQ alignment, ambient RNA correction, cell calling, doublet detection, CITE-seq normalization, or V(D)J assembly. Their external commands, thresholds, software versions, reference bundles, and output checksums must be supplied as upstream provenance. Samples are not excluded solely because their biology differs from the cohort.
 
 RNA and antibody modalities are quality-controlled separately. Antibody-derived tags are normalized with a method appropriate to the experimental controls, such as centered log-ratio normalization or a background-aware method when empty droplets and isotype controls are available. Integration is used for visualization and annotation, not as a substitute for replicate-aware inference.
 
@@ -101,7 +101,7 @@ Single-cell differential-expression methods can otherwise produce false precisio
 
 ### Required annotations
 
-Each specimen requires registered expression or imaging data, tissue mask, segmentation, spatial coordinates, scale, and blinded annotations. The current draft begins from a segmented object/spot table and does not segment or register raw images. Those upstream transformations must therefore be versioned and checksum-verified. Required annotations include:
+Each specimen requires registered expression or imaging data, tissue mask, segmentation, spatial coordinates, scale, and blinded annotations. The root package begins from a segmented object/spot table and does not segment or register raw images. Those upstream transformations must therefore be versioned and checksum-verified. Required annotations include:
 
 - perfused and non-perfused vessels when perfusion information is available;
 - endothelial and lymphatic endothelial compartments;
@@ -227,7 +227,7 @@ Every report includes:
 
 ## Limitations before data acquisition
 
-Without raw scRNA-seq/CITE-seq, spatial, protein, and functional data, the workflow can validate file structure and execute synthetic tests only. It cannot determine cell states, infer a clinical chemokine gradient, quantify CXCL16 proteoforms, establish retention or egress, compare products, or estimate patient-level effects. In the present draft, raw-sequence processing, single-cell annotation, CAR gating, raw-image registration/segmentation, and microscopy-track extraction are upstream responsibilities and are not yet reproduced by repository code. Public expression datasets may test code portability but cannot replace a matched experiment if they lack the same CAR construct, tissue context, time points, and paired control.
+The prospective protein, functional, and matched-product workstreams require additional experimental inputs. The separate [`public reanalysis`](../analyses/public_reanalysis/README.md) reports patient-level transcript-detection summaries from deposited counts and author annotations, but does not establish a clinical protein gradient, CXCL16 proteoforms, retention, egress, or the effect of adding a chemokine module. Raw-sequence processing, cell annotation, image registration/segmentation, and microscopy-track extraction remain upstream responsibilities. Public expression datasets cannot replace a matched experiment if they lack the same CAR construct, tissue context, time points, and paired control.
 
 ## Key references
 

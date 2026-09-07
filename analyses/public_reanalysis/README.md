@@ -86,4 +86,4 @@ Transcript detection does not establish protein abundance or a chemokine gradien
 - Guerrero-Murillo M, Rill-Hinarejos A, Trincado JL, et al. *Cell Rep Med.* 2024;5:101803. doi:10.1016/j.xcrm.2024.101803. GEO: GSE235760.
 - Lu IN, Müller-Miny L, Krekeler C, et al. *Genome Med.* 2025;17:71. doi:10.1186/s13073-025-01498-6. GEO: GSE269379.
 
-Upstream files remain governed by their original repository terms. This repository does not redistribute public source matrices, cell-level metadata, or tissue images.
+Upstream files remain governed by their original repository terms. This repository does not redistribute complete source matrices, cell-level metadata, or source tissue images. Derived tables retain source-defined coded patient identifiers and the clinical categories needed to audit pairing. The spatial visualization includes a cropped, attributed histology background. See [`THIRD_PARTY_NOTICES.md`](../../THIRD_PARTY_NOTICES.md) for attribution and reuse conditions.

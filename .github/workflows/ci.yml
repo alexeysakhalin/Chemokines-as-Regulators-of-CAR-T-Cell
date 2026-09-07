@@ -82,3 +82,39 @@ jobs:
           name: workflow-logs
           path: results/**/logs/*.log
           if-no-files-found: ignore
+
+  release:
+    name: Publish versioned release
+    needs: quality
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Check out validated commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Publish release if version is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          version=$(python3 -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Release requires a stable semantic version."
+            exit 1
+          fi
+          tag="v${version}"
+          if gh release view "$tag" --json tagName >/dev/null 2>&1; then
+            echo "Release ${tag} already exists; it will not be modified."
+            exit 0
+          fi
+          gh release create "$tag" \
+            --target "$RELEASE_COMMIT" \
+            --title "${tag}: reproducible CAR-T chemokine analysis" \
+            --notes-file CHANGELOG.md

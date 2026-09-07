@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "This is a development version. Cite the repository URL, version, and exact Git commit; an archival DOI will be added to the public release."
+message: "Please cite this software using the versioned release and cite each source study when using its data."
 title: "Chemokines as Regulators of CAR-T Cell Therapy: Reproducible Analysis Framework"
 type: software
 authors:
@@ -7,12 +7,14 @@ authors:
     given-names: Aleksei
 repository-code: "https://github.com/alexeysakhalin/Chemokines-as-Regulators-of-CAR-T-Cell"
 url: "https://github.com/alexeysakhalin/Chemokines-as-Regulators-of-CAR-T-Cell"
-version: "0.1.0.dev0"
+version: "1.0.0"
+date-released: "2026-09-07"
 license: MIT
 abstract: >-
-  A reproducible framework for patient- and donor-level analysis of CAR-T-cell
-  single-cell states, spatial chemokine organization, soluble and membrane
-  CXCL16 measurements, and functional chemotaxis, retention, and egress assays.
+  Reproducible exploratory reanalysis of public CAR-T single-cell cohorts,
+  including patient-level longitudinal CXCR6 transcript detection and a
+  descriptive ICANS spatial analysis. The repository also supplies reusable
+  analysis functions and clearly labeled synthetic software-test inputs.
 keywords:
   - CAR-T cells
   - chemokines

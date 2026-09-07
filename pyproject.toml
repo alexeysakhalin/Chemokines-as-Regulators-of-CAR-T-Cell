@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "chemokine-cart"
-version = "0.1.0.dev0"
+version = "1.0.0"
 description = "Reproducible analyses for chemokine regulation of CAR-T cell states and trafficking"
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
